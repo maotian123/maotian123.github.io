@@ -876,6 +876,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/Vinsmono-3/vins3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/31/Vinsmono-3/vins3/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-31 19:10:45 / Modified: 19:29:53" itemprop="dateCreated datePublished" datetime="2022-03-31T19:10:45+08:00">2022-03-31</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3que.png" alt="vin3que"> </p>
+<p><strong>1.2 第二问更改(看错题目了，其实都是很简单的雅可比求导)</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">31</span>行 <span class="built_in">residual_</span>(<span class="number">0</span>) = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) ) - y_;  <span class="comment">// 构建残差</span></span><br><span class="line"></span><br><span class="line"><span class="number">39</span>行 <span class="type">double</span> exp_y = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) );</span><br><span class="line"></span><br><span class="line"><span class="number">44</span>行 jaco_abc &lt;&lt; x_ * x_ * exp_y, x_ * exp_y , <span class="number">1</span> * exp_y;</span><br><span class="line"></span><br><span class="line"><span class="number">76</span>行 <span class="type">double</span> x = i/<span class="number">1000.</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">80</span>行 <span class="type">double</span> y = std::<span class="built_in">exp</span>( a*x*x + b*x + c ) + n;</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.1 第一问 存储lambda的数值</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Problem::SaveLamda</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    outfile.<span class="built_in">open</span>(<span class="string">&quot;/home/maotian/vio/3/ans/CurveFitting_LM/build/app/data.txt&quot;</span>, ios::binary | ios::app | ios::in | ios::out);</span><br><span class="line">    outfile &lt;&lt; currentLambda_ &lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;i++&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    outfile.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (rho &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">isfinite</span>(tempChi))   <span class="comment">// last step was good, 误差在下降</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">double</span> alpha = <span class="number">1.</span> - <span class="built_in">pow</span>((<span class="number">2</span> * rho - <span class="number">1</span>), <span class="number">3</span>);</span><br><span class="line">        alpha = std::<span class="built_in">min</span>(alpha, <span class="number">2.</span> / <span class="number">3.</span>);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; alpha &quot;</span> &lt;&lt; alpha &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">double</span> scaleFactor = (std::max)(<span class="number">1.</span> / <span class="number">3.</span>, alpha);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; scaleFactor &quot;</span> &lt;&lt; scaleFactor &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; currentLambda_ &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        currentLambda_ *= scaleFactor;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;currentLambda_ :  &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        ni_ = <span class="number">2</span>;</span><br><span class="line">        currentChi_ = tempChi;</span><br><span class="line">        <span class="comment">//存储lambda值</span></span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        currentLambda_ *= ni_;</span><br><span class="line">        ni_ *= <span class="number">2</span>;</span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3ans1-2.png" alt="vin3ans1-2"></p>
+<p>上图为lambda所有值</p>
+<p><strong>1.3 <a target="_blank" rel="noopener" href="https://blog.csdn.net/hitljy/article/details/107694047?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164830367716780271564345%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=164830367716780271564345&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-5-107694047.nonecase&utm_term=vio&spm=1018.2226.3001.4450">大佬的多个策略</a></strong></p>
+<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vinsans2.png" alt="vinsans2"></p>
+<p>参考 pdf 的 f35 很容易能够得到结论</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/Vinsmono-2/Vinsmono2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -973,92 +1059,6 @@
 
 <p>标定结果： FILE : imu_utils_ws&#x2F;src&#x2F;imu_utils&#x2F;data</p>
 <p>注意： sim_imu 预设置的噪声 单位为 gyro : rad&#x2F;(s * sqrt(hz)) acc : m&#x2F;(s^2*sqrt(hz)) ， 而imu_utils 预设的的噪声单位为 gyro: rad&#x2F;s acc: m&#x2F;s^2。统一单位时，需要将imu_utils 的结果都除以 sqrt(hz) , sim_imu 的 采样频率为200hz , 所以 imu_utils 的结果都需要除以 sqrt(200) &#x3D; 14.14</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/Vinsmono-3/vins3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="maotian">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maotian">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/31/Vinsmono-3/vins3/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-31 19:10:45 / Modified: 19:29:53" itemprop="dateCreated datePublished" datetime="2022-03-31T19:10:45+08:00">2022-03-31</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3que.png" alt="vin3que"> </p>
-<p><strong>1.2 第二问更改(看错题目了，其实都是很简单的雅可比求导)</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">31</span>行 <span class="built_in">residual_</span>(<span class="number">0</span>) = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) ) - y_;  <span class="comment">// 构建残差</span></span><br><span class="line"></span><br><span class="line"><span class="number">39</span>行 <span class="type">double</span> exp_y = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) );</span><br><span class="line"></span><br><span class="line"><span class="number">44</span>行 jaco_abc &lt;&lt; x_ * x_ * exp_y, x_ * exp_y , <span class="number">1</span> * exp_y;</span><br><span class="line"></span><br><span class="line"><span class="number">76</span>行 <span class="type">double</span> x = i/<span class="number">1000.</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">80</span>行 <span class="type">double</span> y = std::<span class="built_in">exp</span>( a*x*x + b*x + c ) + n;</span><br></pre></td></tr></table></figure>
-
-<p><strong>1.1 第一问 存储lambda的数值</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Problem::SaveLamda</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    outfile.<span class="built_in">open</span>(<span class="string">&quot;/home/maotian/vio/3/ans/CurveFitting_LM/build/app/data.txt&quot;</span>, ios::binary | ios::app | ios::in | ios::out);</span><br><span class="line">    outfile &lt;&lt; currentLambda_ &lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;i++&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    outfile.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (rho &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">isfinite</span>(tempChi))   <span class="comment">// last step was good, 误差在下降</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">double</span> alpha = <span class="number">1.</span> - <span class="built_in">pow</span>((<span class="number">2</span> * rho - <span class="number">1</span>), <span class="number">3</span>);</span><br><span class="line">        alpha = std::<span class="built_in">min</span>(alpha, <span class="number">2.</span> / <span class="number">3.</span>);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; alpha &quot;</span> &lt;&lt; alpha &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">double</span> scaleFactor = (std::max)(<span class="number">1.</span> / <span class="number">3.</span>, alpha);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; scaleFactor &quot;</span> &lt;&lt; scaleFactor &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; currentLambda_ &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        currentLambda_ *= scaleFactor;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;currentLambda_ :  &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        ni_ = <span class="number">2</span>;</span><br><span class="line">        currentChi_ = tempChi;</span><br><span class="line">        <span class="comment">//存储lambda值</span></span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        currentLambda_ *= ni_;</span><br><span class="line">        ni_ *= <span class="number">2</span>;</span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3ans1-2.png" alt="vin3ans1-2"></p>
-<p>上图为lambda所有值</p>
-<p><strong>1.3 <a target="_blank" rel="noopener" href="https://blog.csdn.net/hitljy/article/details/107694047?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164830367716780271564345%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=164830367716780271564345&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-5-107694047.nonecase&utm_term=vio&spm=1018.2226.3001.4450">大佬的多个策略</a></strong></p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vinsans2.png" alt="vinsans2"></p>
-<p>参考 pdf 的 f35 很容易能够得到结论</p>
 
       
     </div>
