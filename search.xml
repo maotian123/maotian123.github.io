@@ -203,7 +203,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title></title>
+    <title>VinsMono-1</title>
     <url>/2022/03/31/Vinsmono-1/vinsmono1/</url>
     <content><![CDATA[<p>1.阅读 VIO 相关综述文献如 a ,回答以下问题:</p>
 <p>• 视觉与 IMU 进行融合之后有何优势?<br>• 有哪些常见的视觉 +IMU 融合方案?有没有工业界应用的例子?<br>• 在学术界,VIO 研究有哪些新进展?有没有将学习方法用到 VIO<br>中的例子?<br>你也可以对自己感兴趣的方向进行文献调研,阐述你的观点。</p>
@@ -251,18 +251,22 @@
 <p>CMakeLists.txt</p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>( VERSION <span class="number">2.8</span> )</span><br><span class="line"><span class="keyword">project</span>(homework)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>( CMAKE_BUILD_TYPE <span class="string">&quot;Release&quot;</span> )</span><br><span class="line"><span class="keyword">set</span>( CMAKE_CXX_FLAGS <span class="string">&quot;-O3&quot;</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加Eigen头文件</span></span><br><span class="line"><span class="keyword">include_directories</span>( <span class="string">&quot;/usr/include/eigen3&quot;</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment"># in osx and brew install</span></span><br><span class="line"><span class="comment"># include_directories( /usr/local/Cellar/eigen/3.3.3/include/eigen3 )</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>( homework homework.cpp )</span><br></pre></td></tr></table></figure>
 
-
-
-<p><img src="/home/maotian/blog/source/assets/vins1-3ques.png" alt="vins1-3ques"></p>
-<p>第一题:</p>
-<p><img src="/home/maotian/blog/source/assets/vins1-3.png" alt="vins1-3"></p>
+<p><img src="/../../source/images/vinsmono1/vins1-3ques.png" alt="vins1-3ques"></p>
+<p>第一题:<img src="/vins1-3.png" alt="vins1-3"></p>
 <p>第二题</p>
 <p><img src="/home/maotian/blog/source/assets/vins1-3-2ans.png" alt="vins1-3-2ans"></p>
-<p><img src="/home/maotian/blog/source/assets/vins1-3-3ans.png" alt="vins1-3-3ans"></p>
+<p><img src="/../../source/images/vinsmono1/vins1-3-3ans.png"></p>
 ]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>VinsMono</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>VinsMono-2</title>
     <url>/2022/03/31/Vinsmono-2/Vinsmono2/</url>
     <content><![CDATA[<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/v21-1.png" alt="v21-1"></p>
 <h3 id="1-下载imu-utils与code-utils以及老师的imu数据生成的仿真数据"><a href="#1-下载imu-utils与code-utils以及老师的imu数据生成的仿真数据" class="headerlink" title="1.下载imu_utils与code_utils以及老师的imu数据生成的仿真数据"></a><strong>1.下载imu_utils与code_utils以及老师的imu数据生成的仿真数据</strong></h3><p><a href="https://github.com/gaowenliang/imu_utils">https://github.com/gaowenliang/imu_utils</a></p>
@@ -309,9 +313,16 @@
 <p>标定结果： FILE : imu_utils_ws&#x2F;src&#x2F;imu_utils&#x2F;data</p>
 <p>注意： sim_imu 预设置的噪声 单位为 gyro : rad&#x2F;(s * sqrt(hz)) acc : m&#x2F;(s^2*sqrt(hz)) ， 而imu_utils 预设的的噪声单位为 gyro: rad&#x2F;s acc: m&#x2F;s^2。统一单位时，需要将imu_utils 的结果都除以 sqrt(hz) , sim_imu 的 采样频率为200hz , 所以 imu_utils 的结果都需要除以 sqrt(200) &#x3D; 14.14</p>
 ]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>VinsMono</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>VinsMono-3</title>
     <url>/2022/03/31/Vinsmono-3/vins3/</url>
     <content><![CDATA[<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3que.png" alt="vin3que"> </p>
 <p><strong>1.2 第二问更改(看错题目了，其实都是很简单的雅可比求导)</strong></p>
@@ -328,9 +339,16 @@
 <p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vinsans2.png" alt="vinsans2"></p>
 <p>参考 pdf 的 f35 很容易能够得到结论</p>
 ]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>VinsMono</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>VinsMono-4</title>
     <url>/2022/03/31/Vinsmono-4/vins4/</url>
     <content><![CDATA[<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3que.png" alt="vin3que"> </p>
 <p><strong>1.2 第二问更改(看错题目了，其实都是很简单的雅可比求导)</strong></p>
@@ -347,10 +365,17 @@
 <p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vinsans2.png" alt="vinsans2"></p>
 <p>参考 pdf 的 f35 很容易能够得到结论</p>
 ]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>VinsMono</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2022/04/01/Vinsmono-5/Vinsmono-5/</url>
+    <title>VinsMono-5</title>
+    <url>/2022/03/31/Vinsmono-5/Vinsmono-5/</url>
     <content><![CDATA[<p><img src="/../../source/images/Vinsmono-5/2022-04-01%2020-52-00%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-01 20-52-00 的屏幕截图"></p>
 <h3 id="1-1-计算H矩阵"><a href="#1-1-计算H矩阵" class="headerlink" title="1-1 计算H矩阵"></a>1-1 计算H矩阵</h3><p>代码中设置相机pose和landmark逆深度两种节点，设置三元边（路标点的逆深度InveseDepth、第一次观测到该路标点的source Camera的位姿T_World_From_Body1，和观测到该路标点的mearsurement Camera位姿T_World_From_Body2）。该三元边残差和对应雅克比的计算参考第3讲视觉重投影误差Jacobian推导部分。</p>
 <p>逆深度的雅可比求导数如下</p>
@@ -367,6 +392,13 @@
 <p><a href="https://blog.csdn.net/OORRANNGGE/article/details/82744157">PCG</a></p>
 <p>反正最后能解x，吗的具体推导过程看不懂先不管了</p>
 ]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>VinsMono</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
   </entry>
   <entry>
     <title>多传感器融合滑动窗口</title>
