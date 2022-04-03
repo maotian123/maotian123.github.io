@@ -166,10 +166,26 @@
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>/2022/04/03/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</url>
+    <content><![CDATA[<p>输入以下指令</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;github用户名&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ssh -keygen -t rsa -C <span class="string">&quot;github注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-14-05%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-14-05 的屏幕截图"></p>
+<p>进入上面的路径打开id_rsa.pub，进入到<a href="https://link.zhihu.com/?target=https://github.com/settings/keys">GitHub_Settings_keys</a></p>
+<p>输入new SSH Key </p>
+<p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-26-53%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-26-53 的屏幕截图"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2022/03/31/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br><span class="line">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</span><br></pre></td></tr></table></figure>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br><span class="line">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</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
