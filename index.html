@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css">
   <script src="/lib/pace/pace.min.js"></script>
@@ -123,12 +123,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -191,6 +191,93 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/01/Vinsmono-5/Vinsmono-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/01/Vinsmono-5/Vinsmono-5/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-04-01 20:45:18 / Modified: 21:49:52" itemprop="dateCreated datePublished" datetime="2022-04-01T20:45:18+08:00">2022-04-01</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/../../source/images/Vinsmono-5/2022-04-01%2020-52-00%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-01 20-52-00 的屏幕截图"></p>
+<h3 id="1-1-计算H矩阵"><a href="#1-1-计算H矩阵" class="headerlink" title="1-1 计算H矩阵"></a>1-1 计算H矩阵</h3><p>代码中设置相机pose和landmark逆深度两种节点，设置三元边（路标点的逆深度InveseDepth、第一次观测到该路标点的source Camera的位姿T_World_From_Body1，和观测到该路标点的mearsurement Camera位姿T_World_From_Body2）。该三元边残差和对应雅克比的计算参考第3讲视觉重投影误差Jacobian推导部分。</p>
+<p>逆深度的雅可比求导数如下</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_XCS/article/details/96288327">CSDN逆深度</a> </p>
+<p><img src="/../../source/images/Vinsmono-5/2022-04-01%2020-57-49%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-01 20-57-49 的屏幕截图"></p>
+<p>参照ppt中公式，代码中b计算时自身为负数所以代码中b与公式相反</p>
+<p><code>void Problem::MakeHessian()</code>中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 所有的信息矩阵叠加起来</span></span><br><span class="line"> <span class="comment">// <span class="doctag">TODO:</span>: home work. 完成 H index 的填写.</span></span><br><span class="line"> <span class="comment">// 确定不会有错误的产生，那么可以使用noaliasd()函数来避免产生临时变量,使用noalias()函数来声明这里没有混淆直接赋值</span></span><br><span class="line"> H.<span class="built_in">block</span>(index_i, index_j, dim_i, dim_j).<span class="built_in">noalias</span>() += hessian;</span><br><span class="line"> <span class="keyword">if</span> (j != i) &#123;</span><br><span class="line">     <span class="comment">// 对称的下三角</span></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span>: home work. 完成 H index 的填写.</span></span><br><span class="line">     H.<span class="built_in">block</span>(index_j, index_i, dim_j, dim_i).<span class="built_in">noalias</span>() += hessian.<span class="built_in">transpose</span>();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>void Problem::SolveLinearSystem()</code>中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SLAM 问题采用舒尔补的计算方式</span></span><br><span class="line"><span class="comment">// step1: schur marginalization --&gt; Hpp, bpp</span></span><br><span class="line"><span class="type">int</span> reserve_size = ordering_poses_;</span><br><span class="line"><span class="type">int</span> marg_size = ordering_landmarks_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span>: home work. 完成矩阵块取值，Hmm，Hpm，Hmp，bpp，bmm</span></span><br><span class="line"> MatXX Hmm = Hessian_.<span class="built_in">block</span>(reserve_size,reserve_size, marg_size, marg_size);</span><br><span class="line"> MatXX Hpm = Hessian_.<span class="built_in">block</span>(<span class="number">0</span>,reserve_size, reserve_size, marg_size);</span><br><span class="line"> MatXX Hmp = Hessian_.<span class="built_in">block</span>(reserve_size,<span class="number">0</span>, marg_size, reserve_size);</span><br><span class="line"> VecX bpp = b_.<span class="built_in">segment</span>(<span class="number">0</span>,reserve_size);</span><br><span class="line"> VecX bmm = b_.<span class="built_in">segment</span>(reserve_size,marg_size);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Hmm 是对角线矩阵，它的求逆可以直接为对角线块分别求逆，如果是逆深度，对角线块为1维的，则直接为对角线的倒数，这里可以加速</span></span><br><span class="line"><span class="function">MatXX <span class="title">Hmm_inv</span><span class="params">(MatXX::Zero(marg_size, marg_size))</span></span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> landmarkVertex : idx_landmark_vertices_) &#123;</span><br><span class="line">    <span class="type">int</span> idx = landmarkVertex.second-&gt;<span class="built_in">OrderingId</span>() - reserve_size;</span><br><span class="line">    <span class="type">int</span> size = landmarkVertex.second-&gt;<span class="built_in">LocalDimension</span>();</span><br><span class="line">    Hmm_inv.<span class="built_in">block</span>(idx, idx, size, size) = Hmm.<span class="built_in">block</span>(idx, idx, size, size).<span class="built_in">inverse</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span>: home work. 完成舒尔补 Hpp, bpp 代码</span></span><br><span class="line">MatXX tempH = Hpm * Hmm_inv;</span><br><span class="line"> H_pp_schur_ = Hessian_.<span class="built_in">block</span>(<span class="number">0</span>,<span class="number">0</span>,reserve_size,reserve_size) - tempH * Hmp;</span><br><span class="line"> b_pp_schur_ = bpp - tempH * bpp;</span><br><span class="line"></span><br><span class="line"><span class="comment">// step2: solve Hpp * delta_x = bpp</span></span><br><span class="line"><span class="function">VecX <span class="title">delta_x_pp</span><span class="params">(VecX::Zero(reserve_size))</span></span>;</span><br><span class="line"><span class="comment">// PCG Solver</span></span><br><span class="line"><span class="keyword">for</span> (ulong i = <span class="number">0</span>; i &lt; ordering_poses_; ++i) &#123;</span><br><span class="line">    <span class="built_in">H_pp_schur_</span>(i, i) += currentLambda_;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n = H_pp_schur_.<span class="built_in">rows</span>() * <span class="number">2</span>;                       <span class="comment">// 迭代次数</span></span><br><span class="line">delta_x_pp = <span class="built_in">PCGSolver</span>(H_pp_schur_, b_pp_schur_, n);  <span class="comment">// 哈哈，小规模问题，搞 pcg 花里胡哨</span></span><br><span class="line">delta_x_.<span class="built_in">head</span>(reserve_size) = delta_x_pp;</span><br><span class="line"><span class="comment">//        std::cout &lt;&lt; delta_x_pp.transpose() &lt;&lt; std::endl;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span>: home work. step3: solve landmark</span></span><br><span class="line"><span class="function">VecX <span class="title">delta_x_ll</span><span class="params">(marg_size)</span></span>;</span><br><span class="line">delta_x_ll = Hmm_inv * (bmm - Hmp * delta_x_pp);</span><br><span class="line">delta_x_.<span class="built_in">tail</span>(marg_size) = delta_x_ll;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>预处理共轭梯度法PCG(Preconditioned Conjugate Gradient)是一种SLAM中常用的位姿优化算法，从共轭梯度法（Conjugate Gradient）衍生而来，用于快速计算最优值。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/OORRANNGGE/article/details/82744157">PCG</a></p>
+<p>反正最后能解x，吗的具体推导过程看不懂先不管了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -876,6 +963,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/%E5%A4%9A%E4%BC%A0%E6%84%9F%E5%99%A8%E8%9E%8D%E5%90%88/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/31/%E5%A4%9A%E4%BC%A0%E6%84%9F%E5%99%A8%E8%9E%8D%E5%90%88/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" class="post-title-link" itemprop="url">多传感器融合滑动窗口</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-31 19:16:24" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-02 13:22:15" itemprop="dateModified" datetime="2022-04-02T13:22:15+08:00">2022-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/%E5%A4%9A%E4%BC%A0%E6%84%9F%E5%99%A8%E8%9E%8D%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">多传感器融合</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>61</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53972892">因子图优化 SLAM 研究方向归纳</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41281151/article/details/123406337">多传感器融合定位 第九章 基于优化的建图方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/150367249">多传感器融合定位理论基础（十二）：滑动窗口原理及应用</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/Vinsmono-2/Vinsmono2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -988,178 +1169,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/Vinsmono-3/vins3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="maotian">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maotian">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/31/Vinsmono-3/vins3/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-31 19:10:45 / Modified: 19:29:53" itemprop="dateCreated datePublished" datetime="2022-03-31T19:10:45+08:00">2022-03-31</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3que.png" alt="vin3que"> </p>
-<p><strong>1.2 第二问更改(看错题目了，其实都是很简单的雅可比求导)</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">31</span>行 <span class="built_in">residual_</span>(<span class="number">0</span>) = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) ) - y_;  <span class="comment">// 构建残差</span></span><br><span class="line"></span><br><span class="line"><span class="number">39</span>行 <span class="type">double</span> exp_y = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) );</span><br><span class="line"></span><br><span class="line"><span class="number">44</span>行 jaco_abc &lt;&lt; x_ * x_ * exp_y, x_ * exp_y , <span class="number">1</span> * exp_y;</span><br><span class="line"></span><br><span class="line"><span class="number">76</span>行 <span class="type">double</span> x = i/<span class="number">1000.</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">80</span>行 <span class="type">double</span> y = std::<span class="built_in">exp</span>( a*x*x + b*x + c ) + n;</span><br></pre></td></tr></table></figure>
-
-<p><strong>1.1 第一问 存储lambda的数值</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Problem::SaveLamda</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    outfile.<span class="built_in">open</span>(<span class="string">&quot;/home/maotian/vio/3/ans/CurveFitting_LM/build/app/data.txt&quot;</span>, ios::binary | ios::app | ios::in | ios::out);</span><br><span class="line">    outfile &lt;&lt; currentLambda_ &lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;i++&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    outfile.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (rho &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">isfinite</span>(tempChi))   <span class="comment">// last step was good, 误差在下降</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">double</span> alpha = <span class="number">1.</span> - <span class="built_in">pow</span>((<span class="number">2</span> * rho - <span class="number">1</span>), <span class="number">3</span>);</span><br><span class="line">        alpha = std::<span class="built_in">min</span>(alpha, <span class="number">2.</span> / <span class="number">3.</span>);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; alpha &quot;</span> &lt;&lt; alpha &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">double</span> scaleFactor = (std::max)(<span class="number">1.</span> / <span class="number">3.</span>, alpha);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; scaleFactor &quot;</span> &lt;&lt; scaleFactor &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; currentLambda_ &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        currentLambda_ *= scaleFactor;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;currentLambda_ :  &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        ni_ = <span class="number">2</span>;</span><br><span class="line">        currentChi_ = tempChi;</span><br><span class="line">        <span class="comment">//存储lambda值</span></span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        currentLambda_ *= ni_;</span><br><span class="line">        ni_ *= <span class="number">2</span>;</span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3ans1-2.png" alt="vin3ans1-2"></p>
-<p>上图为lambda所有值</p>
-<p><strong>1.3 <a target="_blank" rel="noopener" href="https://blog.csdn.net/hitljy/article/details/107694047?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164830367716780271564345%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=164830367716780271564345&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-5-107694047.nonecase&utm_term=vio&spm=1018.2226.3001.4450">大佬的多个策略</a></strong></p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vinsans2.png" alt="vinsans2"></p>
-<p>参考 pdf 的 f35 很容易能够得到结论</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/Vinsmono-4/vins4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="maotian">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maotian">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/31/Vinsmono-4/vins4/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-31 19:10:45 / Modified: 19:29:53" itemprop="dateCreated datePublished" datetime="2022-03-31T19:10:45+08:00">2022-03-31</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3que.png" alt="vin3que"> </p>
-<p><strong>1.2 第二问更改(看错题目了，其实都是很简单的雅可比求导)</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">31</span>行 <span class="built_in">residual_</span>(<span class="number">0</span>) = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) ) - y_;  <span class="comment">// 构建残差</span></span><br><span class="line"></span><br><span class="line"><span class="number">39</span>行 <span class="type">double</span> exp_y = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) );</span><br><span class="line"></span><br><span class="line"><span class="number">44</span>行 jaco_abc &lt;&lt; x_ * x_ * exp_y, x_ * exp_y , <span class="number">1</span> * exp_y;</span><br><span class="line"></span><br><span class="line"><span class="number">76</span>行 <span class="type">double</span> x = i/<span class="number">1000.</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">80</span>行 <span class="type">double</span> y = std::<span class="built_in">exp</span>( a*x*x + b*x + c ) + n;</span><br></pre></td></tr></table></figure>
-
-<p><strong>1.1 第一问 存储lambda的数值</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Problem::SaveLamda</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    outfile.<span class="built_in">open</span>(<span class="string">&quot;/home/maotian/vio/3/ans/CurveFitting_LM/build/app/data.txt&quot;</span>, ios::binary | ios::app | ios::in | ios::out);</span><br><span class="line">    outfile &lt;&lt; currentLambda_ &lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;i++&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    outfile.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (rho &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">isfinite</span>(tempChi))   <span class="comment">// last step was good, 误差在下降</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">double</span> alpha = <span class="number">1.</span> - <span class="built_in">pow</span>((<span class="number">2</span> * rho - <span class="number">1</span>), <span class="number">3</span>);</span><br><span class="line">        alpha = std::<span class="built_in">min</span>(alpha, <span class="number">2.</span> / <span class="number">3.</span>);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; alpha &quot;</span> &lt;&lt; alpha &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">double</span> scaleFactor = (std::max)(<span class="number">1.</span> / <span class="number">3.</span>, alpha);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; scaleFactor &quot;</span> &lt;&lt; scaleFactor &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; currentLambda_ &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        currentLambda_ *= scaleFactor;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;currentLambda_ :  &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        ni_ = <span class="number">2</span>;</span><br><span class="line">        currentChi_ = tempChi;</span><br><span class="line">        <span class="comment">//存储lambda值</span></span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        currentLambda_ *= ni_;</span><br><span class="line">        ni_ *= <span class="number">2</span>;</span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3ans1-2.png" alt="vin3ans1-2"></p>
-<p>上图为lambda所有值</p>
-<p><strong>1.3 <a target="_blank" rel="noopener" href="https://blog.csdn.net/hitljy/article/details/107694047?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164830367716780271564345%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=164830367716780271564345&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-5-107694047.nonecase&utm_term=vio&spm=1018.2226.3001.4450">大佬的多个策略</a></strong></p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vinsans2.png" alt="vinsans2"></p>
-<p>参考 pdf 的 f35 很容易能够得到结论</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1229,14 +1238,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1279,13 +1288,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">21k</span>
+    <span title="Symbols count total">24k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">19 mins.</span>
+    <span title="Reading time total">21 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
