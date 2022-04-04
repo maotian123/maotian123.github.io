@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="摄像机标定(Camera calibration)简单来说是从世界坐标系换到图像坐标系的过程,即在图片上哪个像素点 标定分为两个部分​    1.第一步是从世界坐标系转换为相机坐标系，这一步是三维点到三维点的转换，主要包括旋转矩阵 R ，t等参数，称为相机外参标定  第二步是相机坐标系到图像坐标系，这一部是三维到二维点的转换，主要包括 K(相机内参)参数，称为相机内参的标定  举列:相机与激光雷">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maotian">
+<meta property="og:url" content="http://example.com/2021/11/01/SLAM/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/index.html">
+<meta property="og:site_name" content="Maotian">
+<meta property="og:description" content="摄像机标定(Camera calibration)简单来说是从世界坐标系换到图像坐标系的过程,即在图片上哪个像素点 标定分为两个部分​    1.第一步是从世界坐标系转换为相机坐标系，这一步是三维点到三维点的转换，主要包括旋转矩阵 R ，t等参数，称为相机外参标定  第二步是相机坐标系到图像坐标系，这一部是三维到二维点的转换，主要包括 K(相机内参)参数，称为相机内参的标定  举列:相机与激光雷">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/home/maotian/标定版.webp">
+<meta property="og:image" content="http://example.com/home/maotian/图片/2021-11-01%2014-37-07%20的屏幕截图.png">
+<meta property="og:image" content="http://example.com/home/maotian/全景相机标定结果.jpg">
+<meta property="og:image" content="http://example.com/home/maotian/RosProject/watman/backpack_equipment/src/test_Word/img1/95.jpg">
+<meta property="og:image" content="http://example.com/home/maotian/RosProject/watman/backpack_equipment/src/test_Word/img2/95.jpg">
+<meta property="article:published_time" content="2021-11-01T05:58:43.101Z">
+<meta property="article:modified_time" content="2022-04-03T04:55:49.151Z">
+<meta property="article:author" content="maotian">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/home/maotian/标定版.webp">
+
+<link rel="canonical" href="http://example.com/2021/11/01/SLAM/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title> | Maotian</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maotian</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">20</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/01/SLAM/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-01 13:58:43" itemprop="dateCreated datePublished" datetime="2021-11-01T13:58:43+08:00">2021-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-03 12:55:49" itemprop="dateModified" datetime="2022-04-03T12:55:49+08:00">2022-04-03</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> 摄像机标定(Camera calibration)简单来说是从<strong>世界坐标系</strong>换到<strong>图像坐标系</strong>的过程,即在图片上哪个像素点</p>
+<h2 id="标定分为两个部分"><a href="#标定分为两个部分" class="headerlink" title="标定分为两个部分"></a>标定分为两个部分</h2><p>​    1.第一步是从世界坐标系转换为相机坐标系，这一步是三维点到三维点的转换，主要包括旋转矩阵 R ，t等参数，称为<strong>相机外参</strong>标定</p>
+<ol start="2">
+<li>第二步是相机坐标系到图像坐标系，这一部是三维到二维点的转换，主要包括 K(相机内参)参数，称为<strong>相机内参</strong>的标定</li>
+</ol>
+<h2 id="举列"><a href="#举列" class="headerlink" title="举列:"></a>举列:</h2><p>相机与激光雷达的标定：</p>
+<h3 id="传统标定方法"><a href="#传统标定方法" class="headerlink" title="传统标定方法"></a>传统标定方法</h3><p>一、外参的标定方法</p>
+<p>​    以相机为中心，根据人为测量激光雷达与相机关于右手坐标系的相对位姿。后续在通过结果细微的调节.</p>
+<p>一、内参的标定方法</p>
+<p>​    (1) 首先打印出标定版，如下图</p>
+<img src="/home/maotian/标定版.webp" style="zoom:50%;" />
+
+
+
+<p>​    (2) 如果是普通相机或者鱼眼相机，有两个使用工具，第一个是<strong>ROS的相机标定工具</strong></p>
+<p>​    在终端输入以下指令</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosrun camera_calibration cameracalibrator.py --size <span class="number">8</span>x6 --square <span class="number">0.108</span> image:=/camera/right/image_raw</span><br></pre></td></tr></table></figure>
+
+<p>​        其中 -<strong>-size</strong> 表示为标定板长宽的黑白格子的数量</p>
+<p>​                <strong>–square</strong> 为每个黑白格的长度，单位为(m)</p>
+<p>​                <strong>–image</strong>    为图像的话题</p>
+<p>​    </p>
+<p>演示效果如下：</p>
+<img src="/home/maotian/图片/2021-11-01 14-37-07 的屏幕截图.png" style="zoom:50%;" />
+
+
+
+<p>右边有四个参数 </p>
+<p>X 为标定板在图像中的<strong>横向照片</strong>提取数量是否满足要求。</p>
+<p>Y 为标定版在图像中的<strong>纵向照片</strong>提取数量是否满足要求。</p>
+<p>Size 为标定版在图像中的<strong>远近照片</strong>提取数量是否满足要求。</p>
+<p>Skew 为标定版在图像中的<strong>倾斜照片</strong>提取数量是否满足要求。</p>
+<p>当所有角度需求满足要求时，即四个参数下方都为绿色时，CALIBRATE按钮显示黄色，点击即可开始标定相机内参。</p>
+<p>第一个滑动条可根据是否为普通相机或者鱼眼相机来选择。    最终得到相机内参参数如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">(<span class="string">&#x27;D = &#x27;</span>, [<span class="number">-0.04483935850269598</span>, <span class="number">0.21668635011274098</span>, <span class="number">-7.511409441343408e-06</span>, <span class="number">-0.014566337456272171</span>, <span class="number">0.0</span>])</span><br><span class="line">(<span class="string">&#x27;K = &#x27;</span>, [<span class="number">657.954311720957</span>, <span class="number">0.0</span>, <span class="number">297.0047475623269</span>, <span class="number">0.0</span>, <span class="number">653.7091694249858</span>, <span class="number">236.35301154477284</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">(<span class="string">&#x27;R = &#x27;</span>, [<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">(<span class="string">&#x27;P = &#x27;</span>, [<span class="number">664.5278930664062</span>, <span class="number">0.0</span>, <span class="number">290.7184962020892</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">667.2344970703125</span>, <span class="number">236.43032880130704</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>])</span><br><span class="line">None</span><br><span class="line"># oST version <span class="number">5.0</span> parameters</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">[image]</span><br><span class="line"> </span><br><span class="line">width</span><br><span class="line"><span class="number">640</span></span><br><span class="line"> </span><br><span class="line">height</span><br><span class="line"><span class="number">480</span></span><br><span class="line"> </span><br><span class="line">[narrow_stereo]</span><br><span class="line"> </span><br><span class="line">camera matrix</span><br><span class="line"><span class="number">657.954312</span> <span class="number">0.000000</span> <span class="number">297.004748</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">653.709169</span> <span class="number">236.353012</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">0.000000</span> <span class="number">1.000000</span></span><br><span class="line"> </span><br><span class="line">distortion</span><br><span class="line"><span class="number">-0.044839</span> <span class="number">0.216686</span> <span class="number">-0.000008</span> <span class="number">-0.014566</span> <span class="number">0.000000</span></span><br><span class="line"> </span><br><span class="line">rectification</span><br><span class="line"><span class="number">1.000000</span> <span class="number">0.000000</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">1.000000</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">0.000000</span> <span class="number">1.000000</span></span><br><span class="line"> </span><br><span class="line">projection</span><br><span class="line"><span class="number">664.527893</span> <span class="number">0.000000</span> <span class="number">290.718496</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">667.234497</span> <span class="number">236.430329</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">0.000000</span> <span class="number">1.000000</span> <span class="number">0.000000</span></span><br></pre></td></tr></table></figure>
+
+<p>主要关注以下参数:</p>
+<p>camera matrix<br>657.954312 0.000000 297.004748       fx , 0, cx<br>0.000000 653.709169 236.353012   &#x3D;  0  , fy ,cy,</p>
+<p>0.000000 0.000000 1.00000<strong>角度映射</strong></p>
+<pre><code>全景相机包含了相机左右360度 上下180度所有的方位
+
+首先通过上述所的激光点到相机坐标转换
+
+得到的相机坐标下的每个激光点的 x y z 
+
+通过 **arctan(y/x)** 得到偏航角度 , 得到在像素坐标横坐标 为  照片长度/360 * 偏航角度
+
+通过 **arctan(z/(x^2 + y^2))** 得到俯仰角度    得到在像素坐标下纵坐标为 照片宽度/180 * 俯仰角度0               0 ,  0 ,  1
+</code></pre>
+<p>当已知外参.激光雷达得到的每个激光点位置转换到相机坐标的转换公式如下 </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> point_in_cam_x = output_cloud-&gt;points[i].x * <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">0</span>) + output_cloud-&gt;points[i].y * <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">1</span>) + output_cloud-&gt;points[i].z * <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">2</span>) + <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line"><span class="type">float</span> point_in_cam_y = output_cloud-&gt;points[i].x * <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">0</span>) + output_cloud-&gt;points[i].y * <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">1</span>) + output_cloud-&gt;points[i].z * <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">2</span>) + <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="type">float</span> point_in_cam_z = output_cloud-&gt;points[i].x * <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">0</span>) + output_cloud-&gt;points[i].y * <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">1</span>) + output_cloud-&gt;points[i].z * <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">2</span>) + <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<p>output_cloud为激光雷达每个激光点的数据</p>
+<p>laser_to_cam_&lt;&lt;0.08083690,       -0.99662126,       -0.01167763,       -0.19623674,<br>                    0.04087759,       0.01505343,       -0.99906721,       -0.26569012,                           R   t<br>                    0.99591426,      0.08030508,       0.04197840,       -0.59186737,                 &#x3D;           0  1<br>                    0.00000000,       0.00000000,       0.00000000,       1.00000000;</p>
+<p>为激光雷达到相机的人为测量的变换矩阵。</p>
+<p>当已知内参，相机坐标中的位置转换到像素位置的位置如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = (<span class="type">int</span>)((<span class="built_in">camera_intrinsics_</span>(<span class="number">0</span>, <span class="number">0</span>) * point_in_cam_x + <span class="built_in">camera_intrinsics_</span>(<span class="number">0</span>, <span class="number">1</span>) * point_in_cam_y + <span class="built_in">camera_intrinsics_</span>(<span class="number">0</span>, <span class="number">2</span>) * point_in_cam_z) / point_in_cam_z);</span><br><span class="line"> <span class="type">int</span> y = (<span class="type">int</span>)((<span class="built_in">camera_intrinsics_</span>(<span class="number">1</span>, <span class="number">0</span>) * point_in_cam_x + <span class="built_in">camera_intrinsics_</span>(<span class="number">1</span>, <span class="number">1</span>) * point_in_cam_y + <span class="built_in">camera_intrinsics_</span>(<span class="number">1</span>, <span class="number">2</span>) * point_in_cam_z) / point_in_cam_z);</span><br></pre></td></tr></table></figure>
+
+<p> camera_intrinsics_ &lt;&lt; fx, 0, cx,0, 0,fy, cy,0,0, 0, 0, 0, 0.0, 0.0, 0.0, 1.0;为相机内参参数</p>
+<p><strong>最终可以实现激光雷达的激光点到相机的像素具体的位置的变换</strong></p>
+<h4 id="也可以使用matlab2020b进行标定"><a href="#也可以使用matlab2020b进行标定" class="headerlink" title="也可以使用matlab2020b进行标定"></a>也可以使用matlab2020b进行标定</h4><p>matlab2019之前的相机标定没有自带可标定鱼眼摄像头的工具</p>
+<p>可参考以下链接</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/heroacool/article/details/51023921">matlab标定</a></p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1gKZkawzO8HEH3BlW-d_vFwhttps://pan.baidu.com/s/1gKZkawzO8HEH3BlW-d_vFw">百度网盘链接 </a></p>
+<h3 id="全景相机的标定方法"><a href="#全景相机的标定方法" class="headerlink" title="全景相机的标定方法"></a>全景相机的标定方法</h3><p>由于全景相机通过自己进行放射变换等一些处理，所以使用传统的标定工具无法得到一个正确的相机内参参数。如下图</p>
+<img src="/home/maotian/全景相机标定结果.jpg" style="zoom: 25%;" />
+
+<p><img src="/home/maotian/RosProject/watman/backpack_equipment/src/test_Word/img1/95.jpg" style="zoom: 50%;" /> <img src="/home/maotian/RosProject/watman/backpack_equipment/src/test_Word/img2/95.jpg" style="zoom: 50%;" /></p>
+<p>传统的matlab标定得到的结果为标定板只会出现在相机坐标系前方180度的范围，而实际标定过程中是对相机360度的范围分别进行了标定。</p>
+<p>所以传统方法不太使用与全景相机的标定</p>
+<p>故采取的方法为如下</p>
+<p>(1) <strong>外参标定</strong></p>
+<p>​    实验方法如上述传统标定方法</p>
+<p>(2) <strong>角度映射</strong></p>
+<p>​    全景相机包含了相机左右360度 上下180度所有的方位</p>
+<p>​    首先通过上述所的激光点到相机坐标转换</p>
+<p>​    得到的相机坐标下的每个激光点的 x y z </p>
+<p>​    通过 <strong>arctan(y&#x2F;x)</strong> 得到偏航角度 , 得到在像素坐标横坐标 为  照片长度&#x2F;360 * 偏航角度</p>
+<p>​    通过 <strong>arctan(z&#x2F;(x^2 + y^2))</strong> 得到俯仰角度    得到在像素坐标下纵坐标为 照片宽度&#x2F;180 * 俯仰角度</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/31/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%AE%9A%E5%88%86%E4%B8%BA%E4%B8%A4%E4%B8%AA%E9%83%A8%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">标定分为两个部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BE%E5%88%97"><span class="nav-number">2.</span> <span class="nav-text">举列:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E6%A0%87%E5%AE%9A%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">传统标定方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8matlab2020b%E8%BF%9B%E8%A1%8C%E6%A0%87%E5%AE%9A"><span class="nav-number">2.1.1.</span> <span class="nav-text">也可以使用matlab2020b进行标定</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E6%99%AF%E7%9B%B8%E6%9C%BA%E7%9A%84%E6%A0%87%E5%AE%9A%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">全景相机的标定方法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">maotian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maotian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">30k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">27 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

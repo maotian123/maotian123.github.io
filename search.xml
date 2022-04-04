@@ -1,21 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>BA优化问题</title>
-    <url>/2022/03/31/BA%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h4 id="BA优化问题"><a href="#BA优化问题" class="headerlink" title="BA优化问题"></a>BA优化问题</h4><p>Bundle Adjustment中文译作光束平差法、捆集调整等，是指从视觉重建中提炼出最优的3D模型和相机参数（内参和外参）。从每个特征点反射出来的几束光线（bundles of light rays），在我们把相机姿态和特征点的位置做出最优的调整（adjustment）之后，最后收束到光心的这个过程，简称BA。</p>
+    <title></title>
+    <url>/2022/04/03/Cholesky%E5%88%86%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="Cholesky分解"><a href="#Cholesky分解" class="headerlink" title="Cholesky分解"></a>Cholesky分解</h1><p><a href="https://zhuanlan.zhihu.com/p/112091443">参考</a></p>
+<p><img src="/../images/2022-04-03%2015-56-07%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 15-56-07 的屏幕截图"></p>
+<p><img src="/../images/2022-04-03%2015-57-48%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 15-57-48 的屏幕截图"></p>
+<p>我们处理系统矩阵已满的“简单”情况秩。 如果系统矩阵秩不足，则其他方法是需要，例如，QR 分解，奇异值分解，或伪逆，</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/04/03/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</url>
+    <content><![CDATA[<p>输入以下指令</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;github用户名&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ssh -keygen -t rsa -C <span class="string">&quot;github注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-14-05%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-14-05 的屏幕截图"></p>
+<p>进入上面的路径打开id_rsa.pub，进入到<a href="https://link.zhihu.com/?target=https://github.com/settings/keys">GitHub_Settings_keys</a></p>
+<p>输入new SSH Key </p>
+<p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-26-53%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-26-53 的屏幕截图"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>SLAM相关库安装</title>
+    <url>/2022/03/31/%E9%87%8D%E8%A6%81%E5%BA%93%E5%AD%98%E7%9A%84%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>由于自己的一条sudo rm -rf &#x2F;usr&#x2F;local&#x2F;lib&#x2F; *这一条指令，导致自己lib里面的全部文件都消失了。</p>
+<p>如果是以前的自己肯定不会想记录下来，因为自己本来就不是个喜欢记录的人。</p>
+<p>一步步来吧，最近刚开始有记录的意识，，希望慢慢养成习惯</p>
+<p>lib集合的库存链接</p>
+<p><a href="https://gitee.com/maotian123/sourcedowload">lib</a></p>
+<p><strong>g2o</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 从github上下载源码</span></span><br><span class="line">$ https:<span class="comment">//github.com/RainerKuemmerle/g2o/tree/20170730_git</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 安装依赖</span></span><br><span class="line">$ sudo apt-get install cmake libeigen3-dev libsuitesparse-dev qtdeclarative5-dev qt5-qmake libqglviewer-dev</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译</span></span><br><span class="line">$ cd g2o</span><br><span class="line">$ mkdir build</span><br><span class="line">$ cd build</span><br><span class="line">$ sudo ldconfig</span><br><span class="line">$ cmake ..</span><br><span class="line">$ make -j4</span><br><span class="line"></span><br><span class="line"><span class="comment">//安装</span></span><br><span class="line">$ sudo make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong> 一定要在编译前进入build，进行sudo ldconfig</p>
+<p>如果你需要安装ceres。个人建议先安装gflags和glog</p>
+<p><strong>gflags</strong></p>
+<p><a href="https://blog.csdn.net/kenstandlee/article/details/117080316">参考地址</a></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 克隆源码</span></span><br><span class="line">$ git clone https:<span class="comment">//github.com/gflags/gflags</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解压并进入文件夹</span></span><br><span class="line">$ cd gflags</span><br><span class="line"></span><br><span class="line">git clone https:<span class="comment">//github.com/gflags/gflags.git</span></span><br><span class="line">cd gflags</span><br><span class="line">mkdir build &amp;&amp; cd build</span><br><span class="line">cmake -DGFLAGS_NAMESPACE=google -DCMAKE_CXX_FLAGS=-fPIC -DBUILD_SHARED_LIBS=ON ..</span><br><span class="line">make -j</span><br><span class="line">sudo make install</span><br><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Geographic</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要自己下载源码</span></span><br><span class="line">下载地址： https:<span class="comment">//sourceforge.net/projects/geographiclib/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解压并进入文件夹</span></span><br><span class="line">$ cd GeographicLib<span class="number">-1.52</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译及安装</span></span><br><span class="line">$ mkdir build</span><br><span class="line">$ cd build</span><br><span class="line">$ cmake ..</span><br><span class="line">$ make -j4</span><br><span class="line">$ sudo make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>glog</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 克隆源码</span></span><br><span class="line">$ git clone https:<span class="comment">//github.com/boboxxd/glog.git</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解压并进入文件夹</span></span><br><span class="line">$ cd glog</span><br><span class="line"></span><br><span class="line"><span class="comment">// 安装依赖</span></span><br><span class="line">$ sudo apt-get install autoconf automake libtool</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置</span></span><br><span class="line">$ ./autogen.sh</span><br><span class="line">$ ./configure</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译及安装</span></span><br><span class="line">$ mkdir build</span><br><span class="line">$ cd build</span><br><span class="line">$ cmake ..</span><br><span class="line">$ make -j4</span><br><span class="line">$ sudo make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>ceres</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要自己下载源码</span></span><br><span class="line">下载地址： https:<span class="comment">//github.com/ceres-solver/ceres-solver/releases</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改 sources.list</span></span><br><span class="line">$ sudo gedit /etc/apt/sources.<span class="built_in">list</span></span><br><span class="line"><span class="comment">// 将此地址添加到source.list上</span></span><br><span class="line">$ deb http:<span class="comment">//cz.archive.ubuntu.com/ubuntu trusty main universe </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新源</span></span><br><span class="line">$ sudo apt-get update</span><br><span class="line"></span><br><span class="line"><span class="comment">// 安装依赖</span></span><br><span class="line">$ sudo apt-get install liblapack-dev libsuitesparse-dev libcxsparse3 libgflags-dev libgoogle-glog-dev libgtest-dev</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解压并进入文件夹</span></span><br><span class="line">$ cd ceres-solver<span class="number">-1.14</span><span class="number">.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译及安装</span></span><br><span class="line">$ mkdir build</span><br><span class="line">$ cd build</span><br><span class="line">$ cmake ..</span><br><span class="line">$ make -j4</span><br><span class="line">$ sudo make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>gtsam</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 克隆源码&amp;自行下载</span></span><br><span class="line">$ https:<span class="comment">//github.com/borglab/gtsam/archive/4.0.2.zip</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解压并进入文件夹</span></span><br><span class="line">$ unzip gtsam<span class="number">-4.0</span><span class="number">.2</span>.zip</span><br><span class="line">$ cd gtsam<span class="number">-4.0</span><span class="number">.2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译及安装</span></span><br><span class="line">$ mkdir build</span><br><span class="line">$ cd build</span><br><span class="line">$ cmake -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF ..</span><br><span class="line">$ sudo make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>protobuf</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 克隆源码&amp;自行下载 - V3.14</span></span><br><span class="line">$ https:<span class="comment">//github.com/protocolbuffers/protobuf/tree/3.14.x</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解压并进入文件夹</span></span><br><span class="line">$ unzip protobuf<span class="number">-3.14</span>.x.zip</span><br><span class="line">$ cd protobuf<span class="number">-3.14</span>.x</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译及安装</span></span><br><span class="line">$ ./autogen.sh</span><br><span class="line">$ ./configure</span><br><span class="line">$ make</span><br><span class="line">$ sudo make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
 ]]></content>
       <categories>
-        <category>VinsMono</category>
-        <category>BA</category>
+        <category>SLAM</category>
+        <category>安装</category>
       </categories>
       <tags>
-        <tag>VinsMono</tag>
+        <tag>SLAM</tag>
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>/2022/03/31/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%BA%BF%E6%80%A7%E5%8F%98%E5%8C%96/</url>
+    <content><![CDATA[<p>1.两个相互独立的高斯分布相加也是高斯分布</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Eigen的使用方法</title>
-    <url>/2022/03/31/Eigen%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
+    <url>/2022/03/31/Eigen/Eigen%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<p>Eigen的四元数初始化方法</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Eigen::Quaterniond <span class="title">q1</span><span class="params">(w, x, y, z)</span></span>;<span class="comment">// 第一种方式</span></span><br><span class="line"> </span><br><span class="line"><span class="function">Eigen::Quaterniond <span class="title">q2</span><span class="params">(Vector4d(x, y, z, w))</span></span>;<span class="comment">// 第二种方式</span></span><br><span class="line"> </span><br><span class="line"><span class="function">Eigen::Quaterniond <span class="title">q2</span><span class="params">(Matrix3d(R))</span></span>;<span class="comment">// 第三种方式</span></span><br></pre></td></tr></table></figure>
 
@@ -24,7 +91,7 @@
 
 <p>Eigen旋转矩阵转四元数</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Eigen::Quaterniond q;</span><br><span class="line">q = R;     <span class="comment">//内部存在重载</span></span><br><span class="line">cout &lt;&lt; q.<span class="built_in">x</span>() &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; q.<span class="built_in">y</span>() &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; q.<span class="built_in">z</span>() &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; q.<span class="built_in">w</span>() &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<span id="more"></span>
 <p>Eigen 四元数转旋转矩阵</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Eigen::Matrix3d Rx = q.<span class="built_in">toRotationMatrix</span>();</span><br></pre></td></tr></table></figure>
 
@@ -49,8 +116,80 @@
       </tags>
   </entry>
   <entry>
+    <title>Git</title>
+    <url>/2022/03/31/Git/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</url>
+    <content><![CDATA[<p>输入以下指令</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;github用户名&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ssh -keygen -t rsa -C <span class="string">&quot;github注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-14-05%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-14-05 的屏幕截图"></p>
+<p>进入上面的路径打开id_rsa.pub，进入到<a href="https://link.zhihu.com/?target=https://github.com/settings/keys">GitHub_Settings_keys</a></p>
+<p>输入new SSH Key </p>
+<p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-26-53%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-26-53 的屏幕截图"></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+        <category>远程仓库</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2022/03/31/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br><span class="line">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</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>ROS</title>
+    <url>/2022/03/31/ROS/ROS%20%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<h2 id="ROS-使用的一些技巧"><a href="#ROS-使用的一些技巧" class="headerlink" title="ROS 使用的一些技巧"></a>ROS 使用的一些技巧</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>1.launch 文件 启动rosbag包</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">&lt;node pkg=<span class="string">&quot;rosbag&quot;</span> name=<span class="string">&quot;rosbag&quot;</span> type=<span class="string">&quot;play&quot;</span> args=<span class="string">&quot;$(find robot_pose_ekf)/test/zero_covariance_indexed.bag&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建工作空间"><a href="#创建工作空间" class="headerlink" title="创建工作空间"></a>创建工作空间</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg my_demo roscpp rospy std_msg</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ROS</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BA优化问题</title>
+    <url>/2022/03/31/SLAM/BA%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h4 id="BA优化问题"><a href="#BA优化问题" class="headerlink" title="BA优化问题"></a>BA优化问题</h4><p>Bundle Adjustment中文译作光束平差法、捆集调整等，是指从视觉重建中提炼出最优的3D模型和相机参数（内参和外参）。从每个特征点反射出来的几束光线（bundles of light rays），在我们把相机姿态和特征点的位置做出最优的调整（adjustment）之后，最后收束到光心的这个过程，简称BA。</p>
+]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>BA</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IC_SVD的公式推导</title>
-    <url>/2022/03/31/ICP_SVD/</url>
+    <url>/2022/03/31/SLAM/ICP_SVD/</url>
     <content><![CDATA[<h2 id="ICP-SVD"><a href="#ICP-SVD" class="headerlink" title="ICP_SVD"></a>ICP_SVD</h2><p>设目标点云的点集为 : X &#x3D; {x1,x2……,xn}</p>
 <p>设当前点云的点集为 : Y &#x3D; {y1,y2……,yn}</p>
 <p>所构建的目标方程为:</p>
@@ -82,50 +221,8 @@
       </tags>
   </entry>
   <entry>
-    <title>PL_ICP的实现方法</title>
-    <url>/2022/03/31/PL-ICP%20%E4%BA%8C%E7%BA%AC%E6%BF%80%E5%85%89%E7%9A%84/</url>
-    <content><![CDATA[<p>PL-ICP 二纬激光</p>
-<p>​    通过ceres建立当前激光帧与上一次的 local_map点线的参差，具体步骤如下:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//cost function 的结构体构建</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Pl_ICP</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Pl_ICP</span>(Eigen::Vector3d cur_point_, Eigen::Vector3d last_point_a_, Eigen::Vector3d last_point_b_):</span><br><span class="line">        <span class="built_in">curr_point</span>(cur_point_),</span><br><span class="line">        <span class="built_in">last_point_a</span>(last_point_a_),</span><br><span class="line">        <span class="built_in">last_point_b</span>(last_point_b_)</span><br><span class="line">        &#123;&#125; <span class="comment">//cost funstion 需要传入的参数</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">        <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> T*q,<span class="type">const</span> T *t, T *residual )</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">        </span>&#123;   <span class="comment">//cost funcstion 的公式</span></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; cp&#123;<span class="built_in">T</span>(curr_point.<span class="built_in">x</span>()), <span class="built_in">T</span>(curr_point.<span class="built_in">y</span>()), <span class="built_in">T</span>(curr_point.<span class="built_in">z</span>())&#125;;</span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; lpa&#123;<span class="built_in">T</span>(last_point_a.<span class="built_in">x</span>()), <span class="built_in">T</span>(last_point_a.<span class="built_in">y</span>()), <span class="built_in">T</span>(last_point_a.<span class="built_in">z</span>())&#125;;</span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; lpb&#123;<span class="built_in">T</span>(last_point_b.<span class="built_in">x</span>()), <span class="built_in">T</span>(last_point_b.<span class="built_in">y</span>()), <span class="built_in">T</span>(last_point_b.<span class="built_in">z</span>())&#125;;</span><br><span class="line"></span><br><span class="line">            Eigen::Quaternion&lt;T&gt; q_last_curr&#123;q[<span class="number">3</span>], q[<span class="number">0</span>], q[<span class="number">1</span>], q[<span class="number">2</span>]&#125;;		</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//q_last_curr.normalize();</span></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; t_last_curr&#123;t[<span class="number">0</span>],t[<span class="number">1</span>],t[<span class="number">2</span>]&#125;;</span><br><span class="line">            Eigen::Matrix&lt;T, <span class="number">3</span>, <span class="number">1</span>&gt; lp;</span><br><span class="line">            lp = q_last_curr *cp + t_last_curr;</span><br><span class="line"></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; AB = lpb  - lpa;</span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; AC = lp -lpa ;</span><br><span class="line"></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; abCrossac = AB.<span class="built_in">cross</span>(AC);</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            residual[<span class="number">0</span>] = (abCrossac.<span class="built_in">norm</span>())/ (AB.<span class="built_in">norm</span>());</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">static</span> ceres::CostFunction *<span class="title">Create</span><span class="params">(<span class="type">const</span> Eigen::Vector3d curr_point, <span class="type">const</span> Eigen::Vector3d last_point_a_,</span></span></span><br><span class="line"><span class="params"><span class="function">                                                                                <span class="type">const</span> Eigen::Vector3d last_point_b_)</span></span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (<span class="keyword">new</span> ceres::<span class="built_in">AutoDiffCostFunction</span>&lt;Pl_ICP,<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>&gt;(<span class="keyword">new</span> <span class="built_in">Pl_ICP</span>(curr_point, last_point_a_, last_point_b_)));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Eigen::Vector3d curr_point, last_point_a, last_point_b;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-<p>将local_map的点云数据输入到kdtree当中，方便后续查找</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; map_frame_.<span class="built_in">size</span>(); ++i)&#123;</span><br><span class="line">    pcl::<span class="built_in">transformPointCloud</span>(</span><br><span class="line">        map_frame_.<span class="built_in">at</span>(i).frame_, </span><br><span class="line">        *transformed_cloud_ptr, </span><br><span class="line">        map_frame_.<span class="built_in">at</span>(i).pose</span><br><span class="line">     );</span><br><span class="line">    *map_ptr_ += *transformed_cloud_ptr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pcl_kdtree_ptr_-&gt;<span class="built_in">setInputCloud</span>(map_ptr_);</span><br></pre></td></tr></table></figure>
-
-<p>将当前帧得到的二维激光点云每个点查找之前输入kdtree中的local_map最近的两个点云进行残差块的输入</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> point_num = current_cloud-&gt;points.<span class="built_in">size</span>();</span><br><span class="line">        ceres::Problem problem_;</span><br><span class="line">           <span class="comment">//后续判断加入的优化变量纬度是否准确</span></span><br><span class="line">        config_.q_parameterization_ptr = <span class="keyword">new</span> ceres::<span class="built_in">EigenQuaternionParameterization</span>();</span><br><span class="line">        <span class="comment">//损失函数</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="comment">//验证是否优化变量的纬度是否正确</span></span><br><span class="line">        problem_.<span class="built_in">AddParameterBlock</span>(param_.q, <span class="number">4</span>, config_.q_parameterization_ptr);</span><br><span class="line">        problem_.<span class="built_in">AddParameterBlock</span>(param_.t, <span class="number">3</span>);</span><br><span class="line">        config_.loss_function_ptr =  <span class="keyword">new</span> ceres::<span class="built_in">CauchyLoss</span>(<span class="number">0.1</span>);</span><br><span class="line">        <span class="comment">//据帧求解方法</span></span><br><span class="line">        config_.options.linear_solver_type = ceres::DENSE_QR;</span><br><span class="line">        <span class="comment">// </span></span><br><span class="line">        </span><br><span class="line">        config_.options.minimizer_type = ceres::TRUST_REGION;</span><br><span class="line">        config_.options.trust_region_strategy_type = ceres::DOGLEG;</span><br><span class="line">        config_.options.dogleg_type = ceres::SUBSPACE_DOGLEG;</span><br><span class="line">        config_.options.num_threads = <span class="number">8</span>;</span><br><span class="line">        config_.options.max_num_iterations = <span class="number">100</span>;</span><br><span class="line">        config_.options.minimizer_progress_to_stdout = <span class="literal">false</span>;</span><br><span class="line">        config_.options.max_solver_time_in_seconds = <span class="number">0.10</span>;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        ros::Time start_time = ros::Time::<span class="built_in">now</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;  i &lt; point_num; ++i)&#123;</span><br><span class="line">            std::vector&lt;<span class="type">int</span>&gt; corr_ind; <span class="comment">//index</span></span><br><span class="line">            std::vector&lt;<span class="type">float</span>&gt; corr_sq_dis; <span class="comment">//</span></span><br><span class="line">            pcl_kdtree_ptr_-&gt;<span class="built_in">nearestKSearch</span>(</span><br><span class="line">                current_cloud-&gt;points[i],</span><br><span class="line">                <span class="number">2</span>,</span><br><span class="line">                corr_ind, corr_sq_dis</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span>(corr_sq_dis[<span class="number">0</span>] &gt; MAX_DIS)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//TODO cerese PL-ICP</span></span><br><span class="line"></span><br><span class="line">            Eigen::Vector3d cp&#123;current_cloud-&gt;points[i].x,current_cloud-&gt;points[i].y,current_cloud-&gt;points[i].z&#125;;</span><br><span class="line">            Eigen::Vector3d lpa&#123;map_ptr_-&gt;points[corr_ind[<span class="number">0</span>]].x,map_ptr_-&gt;points[corr_ind[<span class="number">0</span>]].y,map_ptr_-&gt;points[corr_ind[<span class="number">0</span>]].z&#125;;</span><br><span class="line">            Eigen::Vector3d lpb&#123;map_ptr_-&gt;points[corr_ind[<span class="number">1</span>]].x,map_ptr_-&gt;points[corr_ind[<span class="number">1</span>]].y,map_ptr_-&gt;points[corr_ind[<span class="number">1</span>]].z&#125;;</span><br><span class="line">            ceres::CostFunction *factor_plicp = Pl_ICP::<span class="built_in">Create</span>(</span><br><span class="line">                cp,</span><br><span class="line">                lpa,</span><br><span class="line">                lpb</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">            problem_.<span class="built_in">AddResidualBlock</span>(</span><br><span class="line">                factor_plicp,</span><br><span class="line">                config_.loss_function_ptr,</span><br><span class="line">                param_.q, param_.t</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// solve:</span></span><br><span class="line">        ceres::Solver::Summary summary;</span><br><span class="line"></span><br><span class="line">        ceres::<span class="built_in">Solve</span>(config_.options, &amp;problem_, &amp;summary);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; solve q , t completed &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        </span><br><span class="line">        Eigen::Quaternionf q&#123;param_.q[<span class="number">3</span>],param_.q[<span class="number">0</span>],param_.q[<span class="number">1</span>],param_.q[<span class="number">2</span>]&#125;;</span><br><span class="line">        Eigen::Vector3f t&#123;param_.t[<span class="number">0</span>],param_.t[<span class="number">1</span>],param_.t[<span class="number">2</span>]&#125;;</span><br><span class="line">        q.<span class="built_in">normalize</span>();</span><br><span class="line">        std::cout  &lt;&lt; <span class="string">&quot; q.w() : &quot;</span> &lt;&lt; q.<span class="built_in">w</span>()&lt;&lt; <span class="string">&quot; q.x() : &quot;</span> &lt;&lt; q.<span class="built_in">x</span>()&lt;&lt; <span class="string">&quot; q.y() : &quot;</span> &lt;&lt; q.<span class="built_in">y</span>()&lt;&lt; <span class="string">&quot; q.z() : &quot;</span> &lt;&lt; q.<span class="built_in">z</span>()&lt;&lt; std::endl;</span><br><span class="line">        dq = q;</span><br><span class="line">        dt = t;</span><br><span class="line"></span><br><span class="line">        ros::Time end_time = ros::Time::<span class="built_in">now</span>();</span><br><span class="line">        ros::Duration use_time = end_time - start_time;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; use time : &quot;</span> &lt;&lt; use_time.<span class="built_in">toSec</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这里采取的是自动求导，解析求导本人数学不太好，就不推了，希望可以有人一起交流～～～</p>
-]]></content>
-      <categories>
-        <category>SLAM</category>
-        <category>PL_ICP</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
-        <tag>PL_ICP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ROS</title>
-    <url>/2022/03/31/ROS%20%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<h2 id="ROS-使用的一些技巧"><a href="#ROS-使用的一些技巧" class="headerlink" title="ROS 使用的一些技巧"></a>ROS 使用的一些技巧</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>1.launch 文件 启动rosbag包</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">&lt;node pkg=<span class="string">&quot;rosbag&quot;</span> name=<span class="string">&quot;rosbag&quot;</span> type=<span class="string">&quot;play&quot;</span> args=<span class="string">&quot;$(find robot_pose_ekf)/test/zero_covariance_indexed.bag&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建工作空间"><a href="#创建工作空间" class="headerlink" title="创建工作空间"></a>创建工作空间</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg my_demo roscpp rospy std_msg</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>ROS</category>
-      </categories>
-      <tags>
-        <tag>ROS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SLAM面试问题</title>
-    <url>/2022/03/31/SLAM%E9%9D%A2%E8%AF%95%E7%A2%B0%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE/</url>
+    <url>/2022/03/31/SLAM/SLAM%E9%9D%A2%E8%AF%95%E7%A2%B0%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE/</url>
     <content><![CDATA[<h1 id="SLAM面试碰到的题目"><a href="#SLAM面试碰到的题目" class="headerlink" title="SLAM面试碰到的题目"></a>SLAM面试碰到的题目</h1><h2 id="引用与指针的区别"><a href="#引用与指针的区别" class="headerlink" title="引用与指针的区别"></a>引用与指针的区别</h2><p>1.指针：指针是一个变量，只不过这个变量存储的是一个地址，一般不同计算机存在指针有四位或者八位的情况，他指向内存的一个存储单元；</p>
 <p>2.引用跟原来的变量实质上是同一个东西，只不过是原变量的一个别名而已。如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> a=<span class="number">1</span>;<span class="type">int</span> *p=&amp;a;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a=<span class="number">1</span>;<span class="type">int</span> &amp;b=a;</span><br></pre></td></tr></table></figure>
@@ -166,61 +263,131 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2022/04/03/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</url>
-    <content><![CDATA[<p>输入以下指令</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;github用户名&quot;</span></span><br></pre></td></tr></table></figure>
+    <title>PL_ICP的实现方法</title>
+    <url>/2022/03/31/SLAM/PL-ICP%20%E4%BA%8C%E7%BA%AC%E6%BF%80%E5%85%89%E7%9A%84/</url>
+    <content><![CDATA[<p>PL-ICP 二纬激光</p>
+<p>​    通过ceres建立当前激光帧与上一次的 local_map点线的参差，具体步骤如下:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//cost function 的结构体构建</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Pl_ICP</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Pl_ICP</span>(Eigen::Vector3d cur_point_, Eigen::Vector3d last_point_a_, Eigen::Vector3d last_point_b_):</span><br><span class="line">        <span class="built_in">curr_point</span>(cur_point_),</span><br><span class="line">        <span class="built_in">last_point_a</span>(last_point_a_),</span><br><span class="line">        <span class="built_in">last_point_b</span>(last_point_b_)</span><br><span class="line">        &#123;&#125; <span class="comment">//cost funstion 需要传入的参数</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">        <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> T*q,<span class="type">const</span> T *t, T *residual )</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">        </span>&#123;   <span class="comment">//cost funcstion 的公式</span></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; cp&#123;<span class="built_in">T</span>(curr_point.<span class="built_in">x</span>()), <span class="built_in">T</span>(curr_point.<span class="built_in">y</span>()), <span class="built_in">T</span>(curr_point.<span class="built_in">z</span>())&#125;;</span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; lpa&#123;<span class="built_in">T</span>(last_point_a.<span class="built_in">x</span>()), <span class="built_in">T</span>(last_point_a.<span class="built_in">y</span>()), <span class="built_in">T</span>(last_point_a.<span class="built_in">z</span>())&#125;;</span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; lpb&#123;<span class="built_in">T</span>(last_point_b.<span class="built_in">x</span>()), <span class="built_in">T</span>(last_point_b.<span class="built_in">y</span>()), <span class="built_in">T</span>(last_point_b.<span class="built_in">z</span>())&#125;;</span><br><span class="line"></span><br><span class="line">            Eigen::Quaternion&lt;T&gt; q_last_curr&#123;q[<span class="number">3</span>], q[<span class="number">0</span>], q[<span class="number">1</span>], q[<span class="number">2</span>]&#125;;		</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//q_last_curr.normalize();</span></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; t_last_curr&#123;t[<span class="number">0</span>],t[<span class="number">1</span>],t[<span class="number">2</span>]&#125;;</span><br><span class="line">            Eigen::Matrix&lt;T, <span class="number">3</span>, <span class="number">1</span>&gt; lp;</span><br><span class="line">            lp = q_last_curr *cp + t_last_curr;</span><br><span class="line"></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; AB = lpb  - lpa;</span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; AC = lp -lpa ;</span><br><span class="line"></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; abCrossac = AB.<span class="built_in">cross</span>(AC);</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            residual[<span class="number">0</span>] = (abCrossac.<span class="built_in">norm</span>())/ (AB.<span class="built_in">norm</span>());</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">static</span> ceres::CostFunction *<span class="title">Create</span><span class="params">(<span class="type">const</span> Eigen::Vector3d curr_point, <span class="type">const</span> Eigen::Vector3d last_point_a_,</span></span></span><br><span class="line"><span class="params"><span class="function">                                                                                <span class="type">const</span> Eigen::Vector3d last_point_b_)</span></span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (<span class="keyword">new</span> ceres::<span class="built_in">AutoDiffCostFunction</span>&lt;Pl_ICP,<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>&gt;(<span class="keyword">new</span> <span class="built_in">Pl_ICP</span>(curr_point, last_point_a_, last_point_b_)));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Eigen::Vector3d curr_point, last_point_a, last_point_b;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<p>将local_map的点云数据输入到kdtree当中，方便后续查找</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; map_frame_.<span class="built_in">size</span>(); ++i)&#123;</span><br><span class="line">    pcl::<span class="built_in">transformPointCloud</span>(</span><br><span class="line">        map_frame_.<span class="built_in">at</span>(i).frame_, </span><br><span class="line">        *transformed_cloud_ptr, </span><br><span class="line">        map_frame_.<span class="built_in">at</span>(i).pose</span><br><span class="line">     );</span><br><span class="line">    *map_ptr_ += *transformed_cloud_ptr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pcl_kdtree_ptr_-&gt;<span class="built_in">setInputCloud</span>(map_ptr_);</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ssh -keygen -t rsa -C <span class="string">&quot;github注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<p>将当前帧得到的二维激光点云每个点查找之前输入kdtree中的local_map最近的两个点云进行残差块的输入</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> point_num = current_cloud-&gt;points.<span class="built_in">size</span>();</span><br><span class="line">        ceres::Problem problem_;</span><br><span class="line">           <span class="comment">//后续判断加入的优化变量纬度是否准确</span></span><br><span class="line">        config_.q_parameterization_ptr = <span class="keyword">new</span> ceres::<span class="built_in">EigenQuaternionParameterization</span>();</span><br><span class="line">        <span class="comment">//损失函数</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="comment">//验证是否优化变量的纬度是否正确</span></span><br><span class="line">        problem_.<span class="built_in">AddParameterBlock</span>(param_.q, <span class="number">4</span>, config_.q_parameterization_ptr);</span><br><span class="line">        problem_.<span class="built_in">AddParameterBlock</span>(param_.t, <span class="number">3</span>);</span><br><span class="line">        config_.loss_function_ptr =  <span class="keyword">new</span> ceres::<span class="built_in">CauchyLoss</span>(<span class="number">0.1</span>);</span><br><span class="line">        <span class="comment">//据帧求解方法</span></span><br><span class="line">        config_.options.linear_solver_type = ceres::DENSE_QR;</span><br><span class="line">        <span class="comment">// </span></span><br><span class="line">        </span><br><span class="line">        config_.options.minimizer_type = ceres::TRUST_REGION;</span><br><span class="line">        config_.options.trust_region_strategy_type = ceres::DOGLEG;</span><br><span class="line">        config_.options.dogleg_type = ceres::SUBSPACE_DOGLEG;</span><br><span class="line">        config_.options.num_threads = <span class="number">8</span>;</span><br><span class="line">        config_.options.max_num_iterations = <span class="number">100</span>;</span><br><span class="line">        config_.options.minimizer_progress_to_stdout = <span class="literal">false</span>;</span><br><span class="line">        config_.options.max_solver_time_in_seconds = <span class="number">0.10</span>;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        ros::Time start_time = ros::Time::<span class="built_in">now</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;  i &lt; point_num; ++i)&#123;</span><br><span class="line">            std::vector&lt;<span class="type">int</span>&gt; corr_ind; <span class="comment">//index</span></span><br><span class="line">            std::vector&lt;<span class="type">float</span>&gt; corr_sq_dis; <span class="comment">//</span></span><br><span class="line">            pcl_kdtree_ptr_-&gt;<span class="built_in">nearestKSearch</span>(</span><br><span class="line">                current_cloud-&gt;points[i],</span><br><span class="line">                <span class="number">2</span>,</span><br><span class="line">                corr_ind, corr_sq_dis</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span>(corr_sq_dis[<span class="number">0</span>] &gt; MAX_DIS)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//TODO cerese PL-ICP</span></span><br><span class="line"></span><br><span class="line">            Eigen::Vector3d cp&#123;current_cloud-&gt;points[i].x,current_cloud-&gt;points[i].y,current_cloud-&gt;points[i].z&#125;;</span><br><span class="line">            Eigen::Vector3d lpa&#123;map_ptr_-&gt;points[corr_ind[<span class="number">0</span>]].x,map_ptr_-&gt;points[corr_ind[<span class="number">0</span>]].y,map_ptr_-&gt;points[corr_ind[<span class="number">0</span>]].z&#125;;</span><br><span class="line">            Eigen::Vector3d lpb&#123;map_ptr_-&gt;points[corr_ind[<span class="number">1</span>]].x,map_ptr_-&gt;points[corr_ind[<span class="number">1</span>]].y,map_ptr_-&gt;points[corr_ind[<span class="number">1</span>]].z&#125;;</span><br><span class="line">            ceres::CostFunction *factor_plicp = Pl_ICP::<span class="built_in">Create</span>(</span><br><span class="line">                cp,</span><br><span class="line">                lpa,</span><br><span class="line">                lpb</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">            problem_.<span class="built_in">AddResidualBlock</span>(</span><br><span class="line">                factor_plicp,</span><br><span class="line">                config_.loss_function_ptr,</span><br><span class="line">                param_.q, param_.t</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// solve:</span></span><br><span class="line">        ceres::Solver::Summary summary;</span><br><span class="line"></span><br><span class="line">        ceres::<span class="built_in">Solve</span>(config_.options, &amp;problem_, &amp;summary);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; solve q , t completed &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        </span><br><span class="line">        Eigen::Quaternionf q&#123;param_.q[<span class="number">3</span>],param_.q[<span class="number">0</span>],param_.q[<span class="number">1</span>],param_.q[<span class="number">2</span>]&#125;;</span><br><span class="line">        Eigen::Vector3f t&#123;param_.t[<span class="number">0</span>],param_.t[<span class="number">1</span>],param_.t[<span class="number">2</span>]&#125;;</span><br><span class="line">        q.<span class="built_in">normalize</span>();</span><br><span class="line">        std::cout  &lt;&lt; <span class="string">&quot; q.w() : &quot;</span> &lt;&lt; q.<span class="built_in">w</span>()&lt;&lt; <span class="string">&quot; q.x() : &quot;</span> &lt;&lt; q.<span class="built_in">x</span>()&lt;&lt; <span class="string">&quot; q.y() : &quot;</span> &lt;&lt; q.<span class="built_in">y</span>()&lt;&lt; <span class="string">&quot; q.z() : &quot;</span> &lt;&lt; q.<span class="built_in">z</span>()&lt;&lt; std::endl;</span><br><span class="line">        dq = q;</span><br><span class="line">        dt = t;</span><br><span class="line"></span><br><span class="line">        ros::Time end_time = ros::Time::<span class="built_in">now</span>();</span><br><span class="line">        ros::Duration use_time = end_time - start_time;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; use time : &quot;</span> &lt;&lt; use_time.<span class="built_in">toSec</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-14-05%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-14-05 的屏幕截图"></p>
-<p>进入上面的路径打开id_rsa.pub，进入到<a href="https://link.zhihu.com/?target=https://github.com/settings/keys">GitHub_Settings_keys</a></p>
-<p>输入new SSH Key </p>
-<p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-26-53%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-26-53 的屏幕截图"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2022/03/31/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br><span class="line">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</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>视觉slam的逆深度雅可比求导</title>
-    <url>/2022/03/31/%E9%80%86%E6%B7%B1%E5%BA%A6%E7%9A%84%E9%9B%85%E5%8F%AF%E6%AF%94%E6%B1%82%E5%AF%BC/</url>
-    <content><![CDATA[<h4 id="逆深度的求导"><a href="#逆深度的求导" class="headerlink" title="逆深度的求导"></a>逆深度的求导</h4><p><a href="https://blog.csdn.net/CSDN_XCS/article/details/96288327">CSDN逆深度</a> </p>
+<p>这里采取的是自动求导，解析求导本人数学不太好，就不推了，希望可以有人一起交流～～～</p>
 ]]></content>
       <categories>
-        <category>VinsMono</category>
-        <category>视觉的逆深度雅可比求导</category>
+        <category>SLAM</category>
+        <category>PL_ICP</category>
       </categories>
       <tags>
-        <tag>VinsMono</tag>
+        <tag>SLAM</tag>
+        <tag>PL_ICP</tag>
       </tags>
   </entry>
   <entry>
     <title></title>
-    <url>/2022/03/31/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%BA%BF%E6%80%A7%E5%8F%98%E5%8C%96/</url>
-    <content><![CDATA[<p>1.两个相互独立的高斯分布相加也是高斯分布</p>
+    <url>/2021/11/01/SLAM/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/</url>
+    <content><![CDATA[<p> 摄像机标定(Camera calibration)简单来说是从<strong>世界坐标系</strong>换到<strong>图像坐标系</strong>的过程,即在图片上哪个像素点</p>
+<h2 id="标定分为两个部分"><a href="#标定分为两个部分" class="headerlink" title="标定分为两个部分"></a>标定分为两个部分</h2><p>​    1.第一步是从世界坐标系转换为相机坐标系，这一步是三维点到三维点的转换，主要包括旋转矩阵 R ，t等参数，称为<strong>相机外参</strong>标定</p>
+<ol start="2">
+<li>第二步是相机坐标系到图像坐标系，这一部是三维到二维点的转换，主要包括 K(相机内参)参数，称为<strong>相机内参</strong>的标定</li>
+</ol>
+<h2 id="举列"><a href="#举列" class="headerlink" title="举列:"></a>举列:</h2><p>相机与激光雷达的标定：</p>
+<h3 id="传统标定方法"><a href="#传统标定方法" class="headerlink" title="传统标定方法"></a>传统标定方法</h3><p>一、外参的标定方法</p>
+<p>​    以相机为中心，根据人为测量激光雷达与相机关于右手坐标系的相对位姿。后续在通过结果细微的调节.</p>
+<p>一、内参的标定方法</p>
+<p>​    (1) 首先打印出标定版，如下图</p>
+<img src="/home/maotian/标定版.webp" style="zoom:50%;" />
+
+
+
+<p>​    (2) 如果是普通相机或者鱼眼相机，有两个使用工具，第一个是<strong>ROS的相机标定工具</strong></p>
+<p>​    在终端输入以下指令</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">rosrun camera_calibration cameracalibrator.py --size <span class="number">8</span>x6 --square <span class="number">0.108</span> image:=/camera/right/image_raw</span><br></pre></td></tr></table></figure>
+
+<p>​        其中 -<strong>-size</strong> 表示为标定板长宽的黑白格子的数量</p>
+<p>​                <strong>–square</strong> 为每个黑白格的长度，单位为(m)</p>
+<p>​                <strong>–image</strong>    为图像的话题</p>
+<p>​    </p>
+<p>演示效果如下：</p>
+<img src="/home/maotian/图片/2021-11-01 14-37-07 的屏幕截图.png" style="zoom:50%;" />
+
+
+
+<p>右边有四个参数 </p>
+<p>X 为标定板在图像中的<strong>横向照片</strong>提取数量是否满足要求。</p>
+<p>Y 为标定版在图像中的<strong>纵向照片</strong>提取数量是否满足要求。</p>
+<p>Size 为标定版在图像中的<strong>远近照片</strong>提取数量是否满足要求。</p>
+<p>Skew 为标定版在图像中的<strong>倾斜照片</strong>提取数量是否满足要求。</p>
+<p>当所有角度需求满足要求时，即四个参数下方都为绿色时，CALIBRATE按钮显示黄色，点击即可开始标定相机内参。</p>
+<p>第一个滑动条可根据是否为普通相机或者鱼眼相机来选择。    最终得到相机内参参数如下</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">(<span class="string">&#x27;D = &#x27;</span>, [<span class="number">-0.04483935850269598</span>, <span class="number">0.21668635011274098</span>, <span class="number">-7.511409441343408e-06</span>, <span class="number">-0.014566337456272171</span>, <span class="number">0.0</span>])</span><br><span class="line">(<span class="string">&#x27;K = &#x27;</span>, [<span class="number">657.954311720957</span>, <span class="number">0.0</span>, <span class="number">297.0047475623269</span>, <span class="number">0.0</span>, <span class="number">653.7091694249858</span>, <span class="number">236.35301154477284</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">(<span class="string">&#x27;R = &#x27;</span>, [<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">(<span class="string">&#x27;P = &#x27;</span>, [<span class="number">664.5278930664062</span>, <span class="number">0.0</span>, <span class="number">290.7184962020892</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">667.2344970703125</span>, <span class="number">236.43032880130704</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>])</span><br><span class="line">None</span><br><span class="line"># oST version <span class="number">5.0</span> parameters</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">[image]</span><br><span class="line"> </span><br><span class="line">width</span><br><span class="line"><span class="number">640</span></span><br><span class="line"> </span><br><span class="line">height</span><br><span class="line"><span class="number">480</span></span><br><span class="line"> </span><br><span class="line">[narrow_stereo]</span><br><span class="line"> </span><br><span class="line">camera matrix</span><br><span class="line"><span class="number">657.954312</span> <span class="number">0.000000</span> <span class="number">297.004748</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">653.709169</span> <span class="number">236.353012</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">0.000000</span> <span class="number">1.000000</span></span><br><span class="line"> </span><br><span class="line">distortion</span><br><span class="line"><span class="number">-0.044839</span> <span class="number">0.216686</span> <span class="number">-0.000008</span> <span class="number">-0.014566</span> <span class="number">0.000000</span></span><br><span class="line"> </span><br><span class="line">rectification</span><br><span class="line"><span class="number">1.000000</span> <span class="number">0.000000</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">1.000000</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">0.000000</span> <span class="number">1.000000</span></span><br><span class="line"> </span><br><span class="line">projection</span><br><span class="line"><span class="number">664.527893</span> <span class="number">0.000000</span> <span class="number">290.718496</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">667.234497</span> <span class="number">236.430329</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">0.000000</span> <span class="number">1.000000</span> <span class="number">0.000000</span></span><br></pre></td></tr></table></figure>
+
+<p>主要关注以下参数:</p>
+<p>camera matrix<br>657.954312 0.000000 297.004748       fx , 0, cx<br>0.000000 653.709169 236.353012   &#x3D;  0  , fy ,cy,</p>
+<p>0.000000 0.000000 1.00000<strong>角度映射</strong></p>
+<pre><code>全景相机包含了相机左右360度 上下180度所有的方位
+
+首先通过上述所的激光点到相机坐标转换
+
+得到的相机坐标下的每个激光点的 x y z 
+
+通过 **arctan(y/x)** 得到偏航角度 , 得到在像素坐标横坐标 为  照片长度/360 * 偏航角度
+
+通过 **arctan(z/(x^2 + y^2))** 得到俯仰角度    得到在像素坐标下纵坐标为 照片宽度/180 * 俯仰角度0               0 ,  0 ,  1
+</code></pre>
+<p>当已知外参.激光雷达得到的每个激光点位置转换到相机坐标的转换公式如下 </p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">float</span> point_in_cam_x = output_cloud-&gt;points[i].x * <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">0</span>) + output_cloud-&gt;points[i].y * <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">1</span>) + output_cloud-&gt;points[i].z * <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">2</span>) + <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line"><span class="type">float</span> point_in_cam_y = output_cloud-&gt;points[i].x * <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">0</span>) + output_cloud-&gt;points[i].y * <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">1</span>) + output_cloud-&gt;points[i].z * <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">2</span>) + <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="type">float</span> point_in_cam_z = output_cloud-&gt;points[i].x * <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">0</span>) + output_cloud-&gt;points[i].y * <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">1</span>) + output_cloud-&gt;points[i].z * <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">2</span>) + <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<p>output_cloud为激光雷达每个激光点的数据</p>
+<p>laser_to_cam_&lt;&lt;0.08083690,       -0.99662126,       -0.01167763,       -0.19623674,<br>                    0.04087759,       0.01505343,       -0.99906721,       -0.26569012,                           R   t<br>                    0.99591426,      0.08030508,       0.04197840,       -0.59186737,                 &#x3D;           0  1<br>                    0.00000000,       0.00000000,       0.00000000,       1.00000000;</p>
+<p>为激光雷达到相机的人为测量的变换矩阵。</p>
+<p>当已知内参，相机坐标中的位置转换到像素位置的位置如下</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> x = (<span class="type">int</span>)((<span class="built_in">camera_intrinsics_</span>(<span class="number">0</span>, <span class="number">0</span>) * point_in_cam_x + <span class="built_in">camera_intrinsics_</span>(<span class="number">0</span>, <span class="number">1</span>) * point_in_cam_y + <span class="built_in">camera_intrinsics_</span>(<span class="number">0</span>, <span class="number">2</span>) * point_in_cam_z) / point_in_cam_z);</span><br><span class="line"> <span class="type">int</span> y = (<span class="type">int</span>)((<span class="built_in">camera_intrinsics_</span>(<span class="number">1</span>, <span class="number">0</span>) * point_in_cam_x + <span class="built_in">camera_intrinsics_</span>(<span class="number">1</span>, <span class="number">1</span>) * point_in_cam_y + <span class="built_in">camera_intrinsics_</span>(<span class="number">1</span>, <span class="number">2</span>) * point_in_cam_z) / point_in_cam_z);</span><br></pre></td></tr></table></figure>
+
+<p> camera_intrinsics_ &lt;&lt; fx, 0, cx,0, 0,fy, cy,0,0, 0, 0, 0, 0.0, 0.0, 0.0, 1.0;为相机内参参数</p>
+<p><strong>最终可以实现激光雷达的激光点到相机的像素具体的位置的变换</strong></p>
+<h4 id="也可以使用matlab2020b进行标定"><a href="#也可以使用matlab2020b进行标定" class="headerlink" title="也可以使用matlab2020b进行标定"></a>也可以使用matlab2020b进行标定</h4><p>matlab2019之前的相机标定没有自带可标定鱼眼摄像头的工具</p>
+<p>可参考以下链接</p>
+<p><a href="https://blog.csdn.net/heroacool/article/details/51023921">matlab标定</a></p>
+<p><a href="https://pan.baidu.com/s/1gKZkawzO8HEH3BlW-d_vFwhttps://pan.baidu.com/s/1gKZkawzO8HEH3BlW-d_vFw">百度网盘链接 </a></p>
+<h3 id="全景相机的标定方法"><a href="#全景相机的标定方法" class="headerlink" title="全景相机的标定方法"></a>全景相机的标定方法</h3><p>由于全景相机通过自己进行放射变换等一些处理，所以使用传统的标定工具无法得到一个正确的相机内参参数。如下图</p>
+<img src="/home/maotian/全景相机标定结果.jpg" style="zoom: 25%;" />
+
+<p><img src="/home/maotian/RosProject/watman/backpack_equipment/src/test_Word/img1/95.jpg" style="zoom: 50%;" /> <img src="/home/maotian/RosProject/watman/backpack_equipment/src/test_Word/img2/95.jpg" style="zoom: 50%;" /></p>
+<p>传统的matlab标定得到的结果为标定板只会出现在相机坐标系前方180度的范围，而实际标定过程中是对相机360度的范围分别进行了标定。</p>
+<p>所以传统方法不太使用与全景相机的标定</p>
+<p>故采取的方法为如下</p>
+<p>(1) <strong>外参标定</strong></p>
+<p>​    实验方法如上述传统标定方法</p>
+<p>(2) <strong>角度映射</strong></p>
+<p>​    全景相机包含了相机左右360度 上下180度所有的方位</p>
+<p>​    首先通过上述所的激光点到相机坐标转换</p>
+<p>​    得到的相机坐标下的每个激光点的 x y z </p>
+<p>​    通过 <strong>arctan(y&#x2F;x)</strong> 得到偏航角度 , 得到在像素坐标横坐标 为  照片长度&#x2F;360 * 偏航角度</p>
+<p>​    通过 <strong>arctan(z&#x2F;(x^2 + y^2))</strong> 得到俯仰角度    得到在像素坐标下纵坐标为 照片宽度&#x2F;180 * 俯仰角度</p>
 ]]></content>
   </entry>
   <entry>
+    <title>视觉slam的逆深度雅可比求导</title>
+    <url>/2022/03/31/SLAM/%E9%80%86%E6%B7%B1%E5%BA%A6%E7%9A%84%E9%9B%85%E5%8F%AF%E6%AF%94%E6%B1%82%E5%AF%BC/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<h4 id="逆深度的求导"><a href="#逆深度的求导" class="headerlink" title="逆深度的求导"></a>逆深度的求导</h4><p><a href="https://blog.csdn.net/CSDN_XCS/article/details/96288327">CSDN逆深度</a> </p>
+]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>视觉的逆深度雅可比求导</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>VinsMono-1</title>
-    <url>/2022/03/31/Vinsmono-1/vinsmono1/</url>
+    <url>/2022/03/31/SLAM/Vinsmono-1/vinsmono1/</url>
     <content><![CDATA[<p>1.阅读 VIO 相关综述文献如 a ,回答以下问题:</p>
 <p>• 视觉与 IMU 进行融合之后有何优势?<br>• 有哪些常见的视觉 +IMU 融合方案?有没有工业界应用的例子?<br>• 在学术界,VIO 研究有哪些新进展?有没有将学习方法用到 VIO<br>中的例子?<br>你也可以对自己感兴趣的方向进行文献调研,阐述你的观点。</p>
 <h3 id="1-1-视觉与IMU进行融合之后有何优势"><a href="#1-1-视觉与IMU进行融合之后有何优势" class="headerlink" title="1.1 视觉与IMU进行融合之后有何优势"></a>1.1 视觉与IMU进行融合之后有何优势</h3><table>
@@ -253,7 +420,8 @@
 <p>AR&#x2F;VR，自动驾驶，无人机，手机、无人机拍照防抖</p>
 <p>1.3 在学术界， VIO 研究有哪些新进展？有没有将学习方法用到 VIO中的例子？<br>[LVI-SAM: Tightly-coupled Lidar-Visual-Inertial Odometry via Smoothing and Mapping](TixiaoShan&#x2F;LVI-SAM: LVI-SAM: Tightly-coupled Lidar-Visual-Inertial Odometry<br>via Smoothing and Mapping (github.com))</p>
 <p>R2LIVE: A Robust, Real-time, LiDAR-Inertial-Visual tightly-coupled state Estimator and mapping</p>
-<p><img src="/../../source/images/vinsmono1/vins1-2.png" alt="vins1-2">采取Sophus的方法</p>
+<p><img src="/../../source/images/vinsmono1/vins1-2-16489624014051.png" alt="vins1-2"></p>
+<p>采取Sophus的方法</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Core&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Geometry&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sophus/so3.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span>  <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Eigen::Vector3d  <span class="title">vec</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt;  <span class="string">&quot;vec:  &quot;</span>   &lt;&lt;  endl  &lt;&lt;  vec.<span class="built_in">transpose</span>()  &lt;&lt; endl  &lt;&lt; endl;      <span class="comment">// 自定义旋转向量</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;vecnormd :&quot;</span>&lt;&lt; endl &lt;&lt; (vec/vec.<span class="built_in">norm</span>()).<span class="built_in">transpose</span>() &lt;&lt;endl&lt;&lt;endl;      <span class="comment">//  归一化</span></span><br><span class="line">    <span class="function">Eigen::AngleAxisd <span class="title">angelaxis</span><span class="params">(M_PI/<span class="number">4</span>, vec/vec.norm())</span></span>;      <span class="comment">//   绕轴进行45度旋转</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//  待旋转矩阵</span></span><br><span class="line">    Eigen::Matrix3d R = angelaxis.<span class="built_in">toRotationMatrix</span>();               <span class="comment">//  旋转矢量转旋转矩阵</span></span><br><span class="line">    cout  &lt;&lt;  <span class="string">&quot;R:  &quot;</span>  &lt;&lt; endl   &lt;&lt;  R  &lt;&lt; endl  &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="function">Sophus::SO3d <span class="title">SO3_R</span><span class="params">(R)</span></span>;               <span class="comment">// 从旋转矩阵构造Sophus::SO(3)</span></span><br><span class="line">    <span class="function">Eigen::Quaterniond <span class="title">q</span><span class="params">(R)</span></span>;            <span class="comment">// 从旋转矩阵构造四元数</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;so3 :&quot;</span>&lt;&lt; endl &lt;&lt; SO3_R.<span class="built_in">log</span>().<span class="built_in">transpose</span>() &lt;&lt;endl&lt;&lt;endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;q :&quot;</span>&lt;&lt; endl &lt;&lt; q.<span class="built_in">coeffs</span>().<span class="built_in">transpose</span>() &lt;&lt;endl&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    <span class="function">Eigen::Vector3d <span class="title">update</span><span class="params">(<span class="number">0.01</span>, <span class="number">0.02</span>, <span class="number">0.03</span>)</span></span>; <span class="comment">//更新量</span></span><br><span class="line">    <span class="comment">// 李代数更新</span></span><br><span class="line">    Sophus::SO3d SO3_updated = SO3_R * Sophus::SO3d::<span class="built_in">exp</span>(update);             <span class="comment">//右乘更新</span></span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;SO3 updated = &quot;</span>&lt;&lt; endl &lt;&lt; SO3_updated.<span class="built_in">matrix</span>() &lt;&lt;endl&lt;&lt;endl;                     </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 四元数更新</span></span><br><span class="line">    <span class="function">Eigen::Quaterniond <span class="title">q_update</span><span class="params">(<span class="number">1</span>, update(<span class="number">0</span>)/<span class="number">2</span>, update(<span class="number">1</span>)/<span class="number">2</span>, update(<span class="number">2</span>)/<span class="number">2</span>)</span></span>;</span><br><span class="line">    Eigen::Quaterniond q_updated = q * q_update.<span class="built_in">normalized</span>();           <span class="comment">//  注意需要对更新量进行归一化</span></span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Quaterniond updated = &quot;</span>&lt;&lt; endl &lt;&lt; q_updated.<span class="built_in">toRotationMatrix</span>() &lt;&lt;endl&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;error = &quot;</span>&lt;&lt; endl &lt;&lt;SO3_updated.<span class="built_in">matrix</span>()-q_updated.<span class="built_in">toRotationMatrix</span>()&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>CMakeLists.txt</p>
@@ -267,11 +435,37 @@
 <p>CMakeLists.txt</p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>( VERSION <span class="number">2.8</span> )</span><br><span class="line"><span class="keyword">project</span>(homework)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>( CMAKE_BUILD_TYPE <span class="string">&quot;Release&quot;</span> )</span><br><span class="line"><span class="keyword">set</span>( CMAKE_CXX_FLAGS <span class="string">&quot;-O3&quot;</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加Eigen头文件</span></span><br><span class="line"><span class="keyword">include_directories</span>( <span class="string">&quot;/usr/include/eigen3&quot;</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment"># in osx and brew install</span></span><br><span class="line"><span class="comment"># include_directories( /usr/local/Cellar/eigen/3.3.3/include/eigen3 )</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>( homework homework.cpp )</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../../source/images/vinsmono1/vins1-3ques.png" alt="vins1-3ques"></p>
+<p><img src="/vins1-3ques.png" alt="vins1-3ques"></p>
 <p>第一题:<img src="/vins1-3.png" alt="vins1-3"></p>
 <p>第二题</p>
 <p><img src="/home/maotian/blog/source/assets/vins1-3-2ans.png" alt="vins1-3-2ans"></p>
-<p><img src="/../../source/images/vinsmono1/vins1-3-3ans.png"></p>
+<p><img src="/../../../images/vins1-3.png" alt="vins1-3"></p>
+]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>VinsMono</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VinsMono-3</title>
+    <url>/2022/03/31/SLAM/Vinsmono-3/vins3/</url>
+    <content><![CDATA[<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3que.png" alt="vin3que"> </p>
+<p><strong>1.2 第二问更改(看错题目了，其实都是很简单的雅可比求导)</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="number">31</span>行 <span class="built_in">residual_</span>(<span class="number">0</span>) = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) ) - y_;  <span class="comment">// 构建残差</span></span><br><span class="line"></span><br><span class="line"><span class="number">39</span>行 <span class="type">double</span> exp_y = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) );</span><br><span class="line"></span><br><span class="line"><span class="number">44</span>行 jaco_abc &lt;&lt; x_ * x_ * exp_y, x_ * exp_y , <span class="number">1</span> * exp_y;</span><br><span class="line"></span><br><span class="line"><span class="number">76</span>行 <span class="type">double</span> x = i/<span class="number">1000.</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">80</span>行 <span class="type">double</span> y = std::<span class="built_in">exp</span>( a*x*x + b*x + c ) + n;</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.1 第一问 存储lambda的数值</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Problem::SaveLamda</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    outfile.<span class="built_in">open</span>(<span class="string">&quot;/home/maotian/vio/3/ans/CurveFitting_LM/build/app/data.txt&quot;</span>, ios::binary | ios::app | ios::in | ios::out);</span><br><span class="line">    outfile &lt;&lt; currentLambda_ &lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;i++&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    outfile.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (rho &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">isfinite</span>(tempChi))   <span class="comment">// last step was good, 误差在下降</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">double</span> alpha = <span class="number">1.</span> - <span class="built_in">pow</span>((<span class="number">2</span> * rho - <span class="number">1</span>), <span class="number">3</span>);</span><br><span class="line">        alpha = std::<span class="built_in">min</span>(alpha, <span class="number">2.</span> / <span class="number">3.</span>);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; alpha &quot;</span> &lt;&lt; alpha &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">double</span> scaleFactor = (std::max)(<span class="number">1.</span> / <span class="number">3.</span>, alpha);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; scaleFactor &quot;</span> &lt;&lt; scaleFactor &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; currentLambda_ &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        currentLambda_ *= scaleFactor;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;currentLambda_ :  &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        ni_ = <span class="number">2</span>;</span><br><span class="line">        currentChi_ = tempChi;</span><br><span class="line">        <span class="comment">//存储lambda值</span></span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        currentLambda_ *= ni_;</span><br><span class="line">        ni_ *= <span class="number">2</span>;</span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3ans1-2.png" alt="vin3ans1-2"></p>
+<p>上图为lambda所有值</p>
+<p><strong>1.3 <a href="https://blog.csdn.net/hitljy/article/details/107694047?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164830367716780271564345%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=164830367716780271564345&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-5-107694047.nonecase&utm_term=vio&spm=1018.2226.3001.4450">大佬的多个策略</a></strong></p>
+<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vinsans2.png" alt="vinsans2"></p>
+<p>参考 pdf 的 f35 很容易能够得到结论</p>
 ]]></content>
       <categories>
         <category>SLAM</category>
@@ -283,7 +477,7 @@
   </entry>
   <entry>
     <title>VinsMono-2</title>
-    <url>/2022/03/31/Vinsmono-2/Vinsmono2/</url>
+    <url>/2022/03/31/SLAM/Vinsmono-2/Vinsmono2/</url>
     <content><![CDATA[<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/v21-1.png" alt="v21-1"></p>
 <h3 id="1-下载imu-utils与code-utils以及老师的imu数据生成的仿真数据"><a href="#1-下载imu-utils与code-utils以及老师的imu数据生成的仿真数据" class="headerlink" title="1.下载imu_utils与code_utils以及老师的imu数据生成的仿真数据"></a><strong>1.下载imu_utils与code_utils以及老师的imu数据生成的仿真数据</strong></h3><p><a href="https://github.com/gaowenliang/imu_utils">https://github.com/gaowenliang/imu_utils</a></p>
 <p><a href="https://gitcode.net/mirrors/gaowenliang/code_utils?utm_source=csdn_github_accelerator">https://gitcode.net/mirrors/gaowenliang/code_utils?utm_source=csdn_github_accelerator</a></p>
@@ -338,34 +532,8 @@
       </tags>
   </entry>
   <entry>
-    <title>VinsMono-3</title>
-    <url>/2022/03/31/Vinsmono-3/vins3/</url>
-    <content><![CDATA[<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3que.png" alt="vin3que"> </p>
-<p><strong>1.2 第二问更改(看错题目了，其实都是很简单的雅可比求导)</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="number">31</span>行 <span class="built_in">residual_</span>(<span class="number">0</span>) = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) ) - y_;  <span class="comment">// 构建残差</span></span><br><span class="line"></span><br><span class="line"><span class="number">39</span>行 <span class="type">double</span> exp_y = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) );</span><br><span class="line"></span><br><span class="line"><span class="number">44</span>行 jaco_abc &lt;&lt; x_ * x_ * exp_y, x_ * exp_y , <span class="number">1</span> * exp_y;</span><br><span class="line"></span><br><span class="line"><span class="number">76</span>行 <span class="type">double</span> x = i/<span class="number">1000.</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">80</span>行 <span class="type">double</span> y = std::<span class="built_in">exp</span>( a*x*x + b*x + c ) + n;</span><br></pre></td></tr></table></figure>
-
-<p><strong>1.1 第一问 存储lambda的数值</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Problem::SaveLamda</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    outfile.<span class="built_in">open</span>(<span class="string">&quot;/home/maotian/vio/3/ans/CurveFitting_LM/build/app/data.txt&quot;</span>, ios::binary | ios::app | ios::in | ios::out);</span><br><span class="line">    outfile &lt;&lt; currentLambda_ &lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;i++&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    outfile.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (rho &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">isfinite</span>(tempChi))   <span class="comment">// last step was good, 误差在下降</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">double</span> alpha = <span class="number">1.</span> - <span class="built_in">pow</span>((<span class="number">2</span> * rho - <span class="number">1</span>), <span class="number">3</span>);</span><br><span class="line">        alpha = std::<span class="built_in">min</span>(alpha, <span class="number">2.</span> / <span class="number">3.</span>);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; alpha &quot;</span> &lt;&lt; alpha &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">double</span> scaleFactor = (std::max)(<span class="number">1.</span> / <span class="number">3.</span>, alpha);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; scaleFactor &quot;</span> &lt;&lt; scaleFactor &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; currentLambda_ &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        currentLambda_ *= scaleFactor;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;currentLambda_ :  &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        ni_ = <span class="number">2</span>;</span><br><span class="line">        currentChi_ = tempChi;</span><br><span class="line">        <span class="comment">//存储lambda值</span></span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        currentLambda_ *= ni_;</span><br><span class="line">        ni_ *= <span class="number">2</span>;</span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3ans1-2.png" alt="vin3ans1-2"></p>
-<p>上图为lambda所有值</p>
-<p><strong>1.3 <a href="https://blog.csdn.net/hitljy/article/details/107694047?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164830367716780271564345%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=164830367716780271564345&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-5-107694047.nonecase&utm_term=vio&spm=1018.2226.3001.4450">大佬的多个策略</a></strong></p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vinsans2.png" alt="vinsans2"></p>
-<p>参考 pdf 的 f35 很容易能够得到结论</p>
-]]></content>
-      <categories>
-        <category>SLAM</category>
-        <category>VinsMono</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>VinsMono-4</title>
-    <url>/2022/03/31/Vinsmono-4/vins4/</url>
+    <url>/2022/03/31/SLAM/Vinsmono-4/vins4/</url>
     <content><![CDATA[<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3que.png" alt="vin3que"> </p>
 <p><strong>1.2 第二问更改(看错题目了，其实都是很简单的雅可比求导)</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="number">31</span>行 <span class="built_in">residual_</span>(<span class="number">0</span>) = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) ) - y_;  <span class="comment">// 构建残差</span></span><br><span class="line"></span><br><span class="line"><span class="number">39</span>行 <span class="type">double</span> exp_y = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) );</span><br><span class="line"></span><br><span class="line"><span class="number">44</span>行 jaco_abc &lt;&lt; x_ * x_ * exp_y, x_ * exp_y , <span class="number">1</span> * exp_y;</span><br><span class="line"></span><br><span class="line"><span class="number">76</span>行 <span class="type">double</span> x = i/<span class="number">1000.</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">80</span>行 <span class="type">double</span> y = std::<span class="built_in">exp</span>( a*x*x + b*x + c ) + n;</span><br></pre></td></tr></table></figure>
@@ -391,7 +559,7 @@
   </entry>
   <entry>
     <title>VinsMono-5</title>
-    <url>/2022/03/31/Vinsmono-5/Vinsmono-5/</url>
+    <url>/2022/03/31/SLAM/Vinsmono-5/Vinsmono-5/</url>
     <content><![CDATA[<p><img src="/../../source/images/Vinsmono-5/2022-04-01%2020-52-00%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-01 20-52-00 的屏幕截图"></p>
 <h3 id="1-1-计算H矩阵"><a href="#1-1-计算H矩阵" class="headerlink" title="1-1 计算H矩阵"></a>1-1 计算H矩阵</h3><p>代码中设置相机pose和landmark逆深度两种节点，设置三元边（路标点的逆深度InveseDepth、第一次观测到该路标点的source Camera的位姿T_World_From_Body1，和观测到该路标点的mearsurement Camera位姿T_World_From_Body2）。该三元边残差和对应雅克比的计算参考第3讲视觉重投影误差Jacobian推导部分。</p>
 <p>逆深度的雅可比求导数如下</p>
@@ -418,7 +586,7 @@
   </entry>
   <entry>
     <title>多传感器融合滑动窗口</title>
-    <url>/2022/03/31/%E5%A4%9A%E4%BC%A0%E6%84%9F%E5%99%A8%E8%9E%8D%E5%90%88/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</url>
+    <url>/2022/03/31/SLAM/%E5%A4%9A%E4%BC%A0%E6%84%9F%E5%99%A8%E8%9E%8D%E5%90%88/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</url>
     <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/53972892">因子图优化 SLAM 研究方向归纳</a></p>
 <p><a href="https://blog.csdn.net/weixin_41281151/article/details/123406337">多传感器融合定位 第九章 基于优化的建图方法</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/150367249">多传感器融合定位理论基础（十二）：滑动窗口原理及应用</a></p>
