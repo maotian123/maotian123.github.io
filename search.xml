@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2022/04/03/Cholesky%E5%88%86%E8%A7%A3/</url>
+    <title>矩阵</title>
+    <url>/2022/03/31/Cholesky%E5%88%86%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="Cholesky分解"><a href="#Cholesky分解" class="headerlink" title="Cholesky分解"></a>Cholesky分解</h1><p><a href="https://zhuanlan.zhihu.com/p/112091443">参考</a></p>
 <p><img src="/../images/2022-04-03%2015-56-07%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 15-56-07 的屏幕截图"></p>
+<span id="more"></span>
 <p><img src="/../images/2022-04-03%2015-57-48%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 15-57-48 的屏幕截图"></p>
 <p>我们处理系统矩阵已满的“简单”情况秩。 如果系统矩阵秩不足，则其他方法是需要，例如，QR 分解，奇异值分解，或伪逆，</p>
 ]]></content>
+      <categories>
+        <category>矩阵运算</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2022/04/03/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</url>
+    <title>Git</title>
+    <url>/2022/03/31/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</url>
     <content><![CDATA[<p>输入以下指令</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;github用户名&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -24,6 +31,13 @@
 <p>输入new SSH Key </p>
 <p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-26-53%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-26-53 的屏幕截图"></p>
 ]]></content>
+      <categories>
+        <category>Git</category>
+        <category>远程仓库连接</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
   </entry>
   <entry>
     <title>SLAM相关库安装</title>
@@ -33,8 +47,9 @@
 <p>一步步来吧，最近刚开始有记录的意识，，希望慢慢养成习惯</p>
 <p>lib集合的库存链接</p>
 <p><a href="https://gitee.com/maotian123/sourcedowload">lib</a></p>
+<span id="more"></span>
 <p><strong>g2o</strong></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 从github上下载源码</span></span><br><span class="line">$ https:<span class="comment">//github.com/RainerKuemmerle/g2o/tree/20170730_git</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 安装依赖</span></span><br><span class="line">$ sudo apt-get install cmake libeigen3-dev libsuitesparse-dev qtdeclarative5-dev qt5-qmake libqglviewer-dev</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译</span></span><br><span class="line">$ cd g2o</span><br><span class="line">$ mkdir build</span><br><span class="line">$ cd build</span><br><span class="line">$ sudo ldconfig</span><br><span class="line">$ cmake ..</span><br><span class="line">$ make -j4</span><br><span class="line"></span><br><span class="line"><span class="comment">//安装</span></span><br><span class="line">$ sudo make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 从github上下载源码</span></span><br><span class="line">$ https:<span class="comment">//github.com/jiajunhua/gaoxiang12-slambook/tree/master/3rdparty</span></span><br><span class="line"><span class="comment">//其他版本的g2o使用任乾的代码会有问题</span></span><br><span class="line"><span class="comment">// 安装依赖</span></span><br><span class="line">$ sudo apt-get install cmake libeigen3-dev libsuitesparse-dev qtdeclarative5-dev qt5-qmake libqglviewer-dev</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译</span></span><br><span class="line">$ cd g2o</span><br><span class="line">$ mkdir build</span><br><span class="line">$ cd build</span><br><span class="line">$ sudo ldconfig</span><br><span class="line">$ cmake ..</span><br><span class="line">$ make -j4</span><br><span class="line"></span><br><span class="line"><span class="comment">//安装</span></span><br><span class="line">$ sudo make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><strong>注：</strong> 一定要在编译前进入build，进行sudo ldconfig</p>
 <p>如果你需要安装ceres。个人建议先安装gflags和glog</p>
@@ -192,6 +207,8 @@
     <url>/2022/03/31/SLAM/ICP_SVD/</url>
     <content><![CDATA[<h2 id="ICP-SVD"><a href="#ICP-SVD" class="headerlink" title="ICP_SVD"></a>ICP_SVD</h2><p>设目标点云的点集为 : X &#x3D; {x1,x2……,xn}</p>
 <p>设当前点云的点集为 : Y &#x3D; {y1,y2……,yn}</p>
+<span id="more"></span>
+
 <p>所构建的目标方程为:</p>
 <p>$$<br>minE(R,t) &#x3D;  min\frac{1}{N} \sum_{i&#x3D;1}^{N}{||x_i - R_{yi}y_i-t||^2}<br>$$<br>对后面的方程进行化简</p>
 <p>首先减去上 X Y  的平均值 为了等式相等所以也得加上</p>
@@ -598,5 +615,102 @@
       <tags>
         <tag>SLAM</tag>
       </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/04/07/B%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<h4 id="激光雷达与imu标定"><a href="#激光雷达与imu标定" class="headerlink" title="激光雷达与imu标定"></a>激光雷达与imu标定</h4><p><a href="https://blog.csdn.net/shenziheng1/article/details/54411098">三次B样</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/103749589">手眼标定</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/04/06/lidar_imu_calibaration/</url>
+    <content><![CDATA[<h1 id="激光imu标定"><a href="#激光imu标定" class="headerlink" title="激光imu标定"></a>激光imu标定</h1><p><a href="https://blog.csdn.net/shenziheng1/article/details/54411098">三次B样</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/103749589">手眼标定</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/04/06/git%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF_%E4%B8%8A%E4%BC%A0/</url>
+    <content><![CDATA[<hr>
+<p>title: Git<br>categories:</p>
+<ul>
+<li>Git</li>
+<li>创建分支_上传<br>tags:</li>
+<li>Git<br>abbrlink: 56533<br>comments: true<br>top: true<br>date: 2022-04-06 22:27:24</li>
+</ul>
+<p>1：git branch branchName(在本地创建一个命名为branchName的分支)</p>
+<p>2：git branch 查看当前自己所在的分支</p>
+<p>3：git branch -a 查看服务器的所有分支以及自己当前所在的分支</p>
+<p>4：git push origin branchName(把命名为branchName的本地分支推送到服务器)</p>
+<p>5：git checkout –track origin&#x2F;branchName (切换为远程服务器上的命名为branchName的远程分支)</p>
+<p>6：如果你的搭档要把他本地的分支给关联到服务器上命名为branchName的远程分支，请执行以下操作，git branch –set-upstream localBranchName origin&#x2F;branchName （为本地分支添加一个对应的远程分支 与之相对应）-&gt;这行命令用来关联本地的分支与服务器上的分支</p>
+<p>7：完成以上操作之后，就可以进行提交代码了，但是在提交代码之前，你要确定你当前所在的分支</p>
+<p>8：git push origin branchName（提交代码到远程服务器上命名为branchName的分支上）</p>
+<p>9 ：git pull origin branchName （从远程分支上拉取代码）</p>
+<h4 id="Everything-up-to-date"><a href="#Everything-up-to-date" class="headerlink" title="Everything up-to-date"></a>Everything up-to-date</h4><p><a href="https://www.cnblogs.com/sminocence/p/6546891.html">https://www.cnblogs.com/sminocence/p/6546891.html</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/04/07/%E4%B8%89%E7%BB%B4%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE%E5%8E%BB%E7%95%B8%E5%8F%98/</url>
+    <content><![CDATA[<h4 id="三维激光雷达去畸变"><a href="#三维激光雷达去畸变" class="headerlink" title="三维激光雷达去畸变"></a>三维激光雷达去畸变</h4><p>主要借鉴以下链接</p>
+<p><a href="https://zhuanlan.zhihu.com/p/351109327">陈伟知乎</a></p>
+<p><strong>1 点云畸变原理</strong></p>
+<p>点云畸变是由于激光雷达采集数据的过程中，随着载体运动导致一帧点云中的点不是在同一时刻采集的，即不同激光点的坐标系不一致。</p>
+<p>小编使用的是VLP-16，纵向排列着16个激光发射器和接收器。VLP-16的垂直测量角度从-15°到+15°，每条激光线之间的角分辨率为2°，在10Hz扫描频率下，水平角分辨率是0.2°，理论上一帧有28800个点。</p>
+<p><strong>1.1 VLP扫描模式</strong></p>
+<p>VLP-16中单个线束为一个Scan，全部16线组成的一帧点云称为一个Sweep，一帧内所有的点，都是按顺序串行扫描的，同一个时间点，只会有一次发送，紧接着一次接收。先从水平第一个角度，一般在0°左右扫描这个水平角度上竖直方向所有16个点(对应16个SCAN)的深度，当然这16个点也是串行按顺序的，然后转到下一个水平角度，比如0.3°开始，水平分辨率0.4°，那么下个角度就是0.7°，然后1.1°。一直顺时针扫完一圈，完成一个Sweep数据的采集。</p>
+<p>在静止的场景中，即激光雷达载体本身静止且环境中没有运动物体，那么采集到的一帧点云没有畸变，如下图所示，每一条线束打到地面上形成一个闭合的圆形：</p>
+<p><img src="/../images/2022-04-07%2010-44-58%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-07 10-44-58 的屏幕截图"></p>
+<p>在运动的场景中，即激光雷达载体运动或者环境中存在运动物体，采集到的点云数据有畸变现象，如下图所示：激光雷达向前运动，物体相对运动，同一种颜色的线表示一条激光打到地面的线束。采集一帧数据起始点时的雷达原点位置和采集一帧数据终止点时的雷达原点位置出现了位移，三维环境信息出现了拉伸的畸变。（运动物体同理）</p>
+<p><img src="/../images/2022-04-07%2010-45-02%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-07 10-45-02 的屏幕截图"></p>
+<p><strong>由此得出机械式激光点云的畸变产生原因：</strong></p>
+<ul>
+<li>激光点的数据不是瞬时获得的</li>
+<li>激光测量时伴随载体或目标的运动</li>
+<li>激光帧率较低时，载体或目标运动畸变不能忽略</li>
+</ul>
+<p>由于雷达计算激光点坐标时，都是以接收到激光束时刻的雷达自身坐标系为基础的，所以载体运动过程中，每一列激光点的基准坐标系都是不一样的，但是他们在同一帧点云里，我们希望能统一在同一个坐标系下，所以我们需要知道每次采集时的坐标系相对于初始时刻坐标系的转换关系。</p>
+<p>本文以传感器辅助方法举例，在loam和百度开源代码中均通过IMU提供载体的速度，加速度等信息，低速运动的场景中可以把载体假设成均速运动模型，即坐标 &#x3D; 运动 × 时间。高速运动的场景中也可以用IMU信息去修正匀速模型假设中非均速部分的误差。</p>
+<p>雷达扫描一帧的时间是固定的，通过计算得到每个点的采集时刻，将所有点都统一到同一时刻，假设选择每完成一帧扫描的结束时刻，如下图所示：<img src="/../images/2022-04-07%2010-50-06%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-07 10-50-06 的屏幕截图"></p>
+<p>t_{k}就是一帧扫描开始的时刻，t_{k + 1}就是完成一次扫描的结束时刻，t_{k + 1} − t_{k}即为固定的扫描时间，水平的箭头表示将所有点都投影到t_{k + 1}时刻。P_{k} 就是这一帧扫描生成的点云，显然不同的点具有不同的时间戳。将t_{k + 1}时刻相对于t_{k}时刻的雷达相对位姿记为T^L_{k+1}，对每个点计算它的补偿变换矩阵T^L_{(k+1,i)}，如下式所示，做简单的线性插值后即可完成补偿。</p>
+<p><img src="/../images/2022-04-07%2010-50-22%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-07 10-50-22 的屏幕截图"></p>
+<p><strong>具体分为以下几个步骤：</strong></p>
+<p><strong>1. 激光雷达和IMU的同步</strong></p>
+<p>根据激光雷达和IMU自带的时间戳，获取距离某一帧点云时间戳最近的IMU数据，时间戳相减求出差值，如果时间差小于同步阈值则作为同步数据输出；如果时间差大于同步阈值则丢弃此数据，拿下一帧激光雷达采样数据循环上述过程。</p>
+<p><strong>2. 无序点云的有序转换</strong></p>
+<p>VLP-16的一帧数据是以点云的形式输出（也就是一堆点，每个点有XYZI的信息，点和点之间无其他关系信息）, 因此我们并不知道每个点属于哪个Scan, 对应哪个水平角度，所以需要对单帧点云进行分线束（分为16束），并记录每个点所属线束和每个点在此帧点云内的相对扫描时间（相对于本帧第一个点）。</p>
+<p><strong>3. 计算载体运动信息</strong></p>
+<p>获取IMU坐标系下三个轴相对于世界坐标系的欧拉角和三个轴上的加速度，然后去除重力影响获得IMU在世界坐标系下的加速度，得到每一帧IMU数据在世界坐标系下对应的位移和速度。最后使用得到的运动信息进行插值，计算每一个激光点相对于起始点扫描时刻激光点的补偿变换矩阵。</p>
+<p><strong>4. 转换每一个激光点</strong></p>
+<p>针对每一个激光点，用补偿变换矩阵乘以原始的激光点坐标，即可得到矫正后的激光点坐标。</p>
+<h2 id="运动目标补偿"><a href="#运动目标补偿" class="headerlink" title="运动目标补偿"></a><strong>运动目标补偿</strong></h2><p>通过IMU获得自身车辆的运动信息，然后在激光雷达采样的点云做运动补偿。此方法适用于自身运动，目标静止的场景；但是在目标物体也运动的场景中，无法对目标物体运动造成的畸变进行校正。</p>
+<p>针对目标物体运动带来的点云畸变，可以在点云障碍物检测跟踪的基础上，利用前一帧与当前帧运动物体的匹配计算其速度信息，加入当前帧中做运动目标的点云畸变补偿。</p>
+<p>刚体</p>
+<p>只有</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/04/05/%E6%97%8B%E8%BD%AC%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<p><a href="https://zinghd.gitee.io/kinematics-DCM-model/">旋转矩阵</a></p>
+<p><img src="/../images/2022-04-05%2014-53-21%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-05 14-53-21 的屏幕截图"></p>
+<p><img src="/../images/2022-04-05%2014-54-54%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-05 14-54-54 的屏幕截图"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/04/20/%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E7%9A%84%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/150438364">https://zhuanlan.zhihu.com/p/150438364</a></p>
+<p><a href="https://blog.csdn.net/tick_tock97/article/details/79885868">https://blog.csdn.net/tick_tock97/article/details/79885868</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/04/12/SLAM/Vinsmono-6/vinsmono6/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/413247298">https://zhuanlan.zhihu.com/p/413247298</a></p>
+]]></content>
   </entry>
 </search>

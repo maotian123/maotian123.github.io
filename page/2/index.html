@@ -123,12 +123,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">13</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">20</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -191,6 +191,701 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/Eigen/Eigen%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/31/Eigen/Eigen%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Eigen的使用方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-31 19:16:24" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-03 13:04:14" itemprop="dateModified" datetime="2022-04-03T13:04:14+08:00">2022-04-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Eigen/" itemprop="url" rel="index"><span itemprop="name">Eigen</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>885</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Eigen的四元数初始化方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Eigen::Quaterniond <span class="title">q1</span><span class="params">(w, x, y, z)</span></span>;<span class="comment">// 第一种方式</span></span><br><span class="line"> </span><br><span class="line"><span class="function">Eigen::Quaterniond <span class="title">q2</span><span class="params">(Vector4d(x, y, z, w))</span></span>;<span class="comment">// 第二种方式</span></span><br><span class="line"> </span><br><span class="line"><span class="function">Eigen::Quaterniond <span class="title">q2</span><span class="params">(Matrix3d(R))</span></span>;<span class="comment">// 第三种方式</span></span><br></pre></td></tr></table></figure>
+
+<p>Eigen欧拉角转旋转矩阵</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Eigen::Vector3d <span class="title">ea0</span><span class="params">(yaw,pitching,roll)</span></span>; <span class="comment">//</span></span><br><span class="line">Eigen::Matrix3d R;</span><br><span class="line">R = ::Eigen::<span class="built_in">AngleAxisd</span>(ea0[<span class="number">0</span>], ::Eigen::Vector3d::<span class="built_in">UnitZ</span>())</span><br><span class="line">        * ::Eigen::<span class="built_in">AngleAxisd</span>(ea0[<span class="number">1</span>], ::Eigen::Vector3d::<span class="built_in">UnitY</span>())</span><br><span class="line">        * ::Eigen::<span class="built_in">AngleAxisd</span>(ea0[<span class="number">2</span>], ::Eigen::Vector3d::<span class="built_in">UnitX</span>());</span><br></pre></td></tr></table></figure>
+
+<p>Eigen旋转矩阵转四元数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Eigen::Quaterniond q;</span><br><span class="line">q = R;     <span class="comment">//内部存在重载</span></span><br><span class="line">cout &lt;&lt; q.<span class="built_in">x</span>() &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; q.<span class="built_in">y</span>() &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; q.<span class="built_in">z</span>() &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; q.<span class="built_in">w</span>() &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/31/Eigen/Eigen%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/Git/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/31/Git/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" class="post-title-link" itemprop="url">Git</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-31 19:16:24" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-03 12:59:15" itemprop="dateModified" datetime="2022-04-03T12:59:15+08:00">2022-04-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">远程仓库</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>190</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>输入以下指令</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;github用户名&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -keygen -t rsa -C <span class="string">&quot;github注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-14-05%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-14-05 的屏幕截图"></p>
+<p>进入上面的路径打开id_rsa.pub，进入到<a href="https://link.zhihu.com/?target=https://github.com/settings/keys">GitHub_Settings_keys</a></p>
+<p>输入new SSH Key </p>
+<p><img src="/../images/git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/2022-04-03%2012-26-53%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-03 12-26-53 的屏幕截图"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/ROS/ROS%20%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/31/ROS/ROS%20%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">ROS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-31 19:16:24 / Modified: 19:29:53" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ROS/" itemprop="url" rel="index"><span itemprop="name">ROS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>230</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="ROS-使用的一些技巧"><a href="#ROS-使用的一些技巧" class="headerlink" title="ROS 使用的一些技巧"></a>ROS 使用的一些技巧</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>1.launch 文件 启动rosbag包</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;node pkg=<span class="string">&quot;rosbag&quot;</span> name=<span class="string">&quot;rosbag&quot;</span> type=<span class="string">&quot;play&quot;</span> args=<span class="string">&quot;$(find robot_pose_ekf)/test/zero_covariance_indexed.bag&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建工作空间"><a href="#创建工作空间" class="headerlink" title="创建工作空间"></a>创建工作空间</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_create_pkg my_demo roscpp rospy std_msg</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/SLAM/BA%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/31/SLAM/BA%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">BA优化问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-31 19:16:24" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-03 13:00:02" itemprop="dateModified" datetime="2022-04-03T13:00:02+08:00">2022-04-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/BA/" itemprop="url" rel="index"><span itemprop="name">BA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>160</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="BA优化问题"><a href="#BA优化问题" class="headerlink" title="BA优化问题"></a>BA优化问题</h4><p>Bundle Adjustment中文译作光束平差法、捆集调整等，是指从视觉重建中提炼出最优的3D模型和相机参数（内参和外参）。从每个特征点反射出来的几束光线（bundles of light rays），在我们把相机姿态和特征点的位置做出最优的调整（adjustment）之后，最后收束到光心的这个过程，简称BA。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/SLAM/ICP_SVD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/31/SLAM/ICP_SVD/" class="post-title-link" itemprop="url">IC_SVD的公式推导</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-31 19:16:24" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-04 14:34:07" itemprop="dateModified" datetime="2022-04-04T14:34:07+08:00">2022-04-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/ICP-SVD/" itemprop="url" rel="index"><span itemprop="name">ICP_SVD</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="ICP-SVD"><a href="#ICP-SVD" class="headerlink" title="ICP_SVD"></a>ICP_SVD</h2><p>设目标点云的点集为 : X &#x3D; {x1,x2……,xn}</p>
+<p>设当前点云的点集为 : Y &#x3D; {y1,y2……,yn}</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/31/SLAM/ICP_SVD/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/SLAM/SLAM%E9%9D%A2%E8%AF%95%E7%A2%B0%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/31/SLAM/SLAM%E9%9D%A2%E8%AF%95%E7%A2%B0%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE/" class="post-title-link" itemprop="url">SLAM面试问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-31 19:16:24 / Modified: 19:29:53" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SLAM面试碰到的题目"><a href="#SLAM面试碰到的题目" class="headerlink" title="SLAM面试碰到的题目"></a>SLAM面试碰到的题目</h1><h2 id="引用与指针的区别"><a href="#引用与指针的区别" class="headerlink" title="引用与指针的区别"></a>引用与指针的区别</h2><p>1.指针：指针是一个变量，只不过这个变量存储的是一个地址，一般不同计算机存在指针有四位或者八位的情况，他指向内存的一个存储单元；</p>
+<p>2.引用跟原来的变量实质上是同一个东西，只不过是原变量的一个别名而已。如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a=<span class="number">1</span>;<span class="type">int</span> *p=&amp;a;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a=<span class="number">1</span>;<span class="type">int</span> &amp;b=a;</span><br></pre></td></tr></table></figure>
+
+<p>上面定义了一个整形变量和一个指针变量p，该指针变量指向a的存储单元，即p的值是a存储单元的地址。</p>
+<h2 id="继承与多态"><a href="#继承与多态" class="headerlink" title="继承与多态"></a>继承与多态</h2><p>继承：C++是面向对象的语言，最重要的一个目的就是提供可重复使用的代码，类继承就是C++提供可扩展和修改类的方法。类继承就是从已有的类中派生出新的类，派生的类继承了的基类的特性，同时也可以添加自己的特性，继承的东西主要有 <strong>基类的变量</strong> <strong>构造函数</strong></p>
+<p><strong>多态：</strong>创建一个基类，后续的子类可以使用虚函数声明 （一个接口，多种方法）</p>
+<p><strong>封装</strong>可以使得代码模块化，<strong>继承</strong>可以扩展已存在的代码，他们的目的都是为了<strong>代码重用</strong>。</p>
+<p>而多态的目的则是为了“接口重用”。也即，不论传递过来的究竟是类的哪个对象，函数都能够通过同一个接口调用到适应各自对象的实现方法。</p>
+<p><strong>虚函数</strong> 是在基类中使用关键字 <strong>virtual</strong> 声明的函数。在派生类中重新定义基类中定义的虚函数时，会告诉编译器不要静态链接到该函数。</p>
+<p>我们想要的是在程序中任意点可以根据所调用的对象类型来选择调用的函数，这种操作被称为<strong>动态链接</strong>，或<strong>后期绑定</strong>。</p>
+<h2 id="struct和union使用区别"><a href="#struct和union使用区别" class="headerlink" title="struct和union使用区别"></a>struct和union使用区别</h2><p>1.<strong>struct</strong>和<strong>union</strong>都是由多个不同的数据类型成员组成, 但在任何时刻, union中只存放了一个被选中的成员, 而struct的所有成员都存在。在struct中，各成员都占有自己的内存空间，它们是同时存在的。</p>
+<p>2.一个struct变量的总长度等于所有成员长度之和。在union中，所有成员不能同时占用它的内存空间，它们不能同时存在。union变量的长度等于最长的成员的长度。</p>
+<p>3.对于union的不同成员赋值, 将会对其它成员重写, 原来成员的值就不存在了, 而对于struct的不同成员赋值是互不影响的。</p>
+<p>union 只会以最大的字节作为内存空间，而且赋值更改所有成员，struct不会</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//本代码在C中</span></span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">Student</span>//定义了一个<span class="title">Student</span>联合体</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">union</span> <span class="title">Student</span> <span class="title">st</span>;</span><span class="comment">//定义Student联合体对象st</span></span><br><span class="line">    <span class="comment">//在C中注意这里定义对象时前要加 union</span></span><br><span class="line">    st.a = <span class="number">90</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.a= %d\n&quot;</span>, st.a);<span class="comment">//90</span></span><br><span class="line">    st.b = <span class="number">80</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.a= %d\n&quot;</span>, st.a);<span class="comment">//此时st.a(90)已经被st.b(80)覆盖</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.b= %d\n&quot;</span>, st.b);<span class="comment">//80</span></span><br><span class="line"> </span><br><span class="line">    st.c = <span class="string">&#x27;0&#x27;</span>;<span class="comment">//字符0的ASIIC值为48</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.c= %c\n&quot;</span>, st.c);<span class="comment">//0</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.a= %d\n&quot;</span>, st.a);<span class="comment">//48</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.b= %d\n&quot;</span>, st.b);<span class="comment">//48</span></span><br><span class="line"> </span><br><span class="line">    st.c = <span class="string">&#x27;1&#x27;</span>;<span class="comment">//字符1的ASIIC值为49</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.c= %c\n&quot;</span>, st.c);<span class="comment">//1</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.a= %d\n&quot;</span>, st.a);<span class="comment">//49</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.b= %d\n&quot;</span>, st.b);<span class="comment">//49</span></span><br><span class="line"> </span><br><span class="line">    st.c = <span class="string">&#x27;a&#x27;</span>;<span class="comment">//字符a的ASIIC值为97</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.c= %c\n&quot;</span>, st.c);<span class="comment">//a</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.a= %d\n&quot;</span>, st.a);<span class="comment">//97</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;st.b= %d\n&quot;</span>, st.b);<span class="comment">//97</span></span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="从代码到可执行程序的四个阶段"><a href="#从代码到可执行程序的四个阶段" class="headerlink" title="从代码到可执行程序的四个阶段"></a>从代码到可执行程序的四个阶段</h2><p>预处理-&gt;编译-&gt;汇编-&gt;链接</p>
+<p>1.预处理</p>
+<p> <strong>预处理主要处理源文件和头文件中以#开头的命令（#<iostream>等），并删除程序中的注释信息等。</strong></p>
+<p>2.编译</p>
+<p><strong>将C++代码翻译成汇编语言</strong></p>
+<p>3.汇编</p>
+<p><strong>对汇编代码进行生成二进制文件</strong></p>
+<p>4.链接</p>
+<p>得到动态链接库和静态链接库（一些函数和全局变量）后便得到可执行文件</p>
+<h2 id="两个串口idProduct-idVendor存在相同情况下的处理条件"><a href="#两个串口idProduct-idVendor存在相同情况下的处理条件" class="headerlink" title="两个串口idProduct idVendor存在相同情况下的处理条件"></a>两个串口idProduct idVendor存在相同情况下的处理条件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">udevadm info --attribute-walk --name=/dev/ttyUSB０</span><br></pre></td></tr></table></figure>
+
+<p>查看更深层次的信息，存在devpath 可区分相同设备的区别的属性</p>
+<h2 id="图优化中信息矩阵的作用"><a href="#图优化中信息矩阵的作用" class="headerlink" title="图优化中信息矩阵的作用"></a>图优化中信息矩阵的作用</h2><p>就是传感器的高斯分布的协方差逆矩阵，主要作用权重，对应的传感器数据越大代表信息作用越重要</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/SLAM/PL-ICP%20%E4%BA%8C%E7%BA%AC%E6%BF%80%E5%85%89%E7%9A%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="maotian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maotian">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/31/SLAM/PL-ICP%20%E4%BA%8C%E7%BA%AC%E6%BF%80%E5%85%89%E7%9A%84/" class="post-title-link" itemprop="url">PL_ICP的实现方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-31 19:16:24 / Modified: 19:29:53" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/PL-ICP/" itemprop="url" rel="index"><span itemprop="name">PL_ICP</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>PL-ICP 二纬激光</p>
+<p>​    通过ceres建立当前激光帧与上一次的 local_map点线的参差，具体步骤如下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//cost function 的结构体构建</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Pl_ICP</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Pl_ICP</span>(Eigen::Vector3d cur_point_, Eigen::Vector3d last_point_a_, Eigen::Vector3d last_point_b_):</span><br><span class="line">        <span class="built_in">curr_point</span>(cur_point_),</span><br><span class="line">        <span class="built_in">last_point_a</span>(last_point_a_),</span><br><span class="line">        <span class="built_in">last_point_b</span>(last_point_b_)</span><br><span class="line">        &#123;&#125; <span class="comment">//cost funstion 需要传入的参数</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">        <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> T*q,<span class="type">const</span> T *t, T *residual )</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">        </span>&#123;   <span class="comment">//cost funcstion 的公式</span></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; cp&#123;<span class="built_in">T</span>(curr_point.<span class="built_in">x</span>()), <span class="built_in">T</span>(curr_point.<span class="built_in">y</span>()), <span class="built_in">T</span>(curr_point.<span class="built_in">z</span>())&#125;;</span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; lpa&#123;<span class="built_in">T</span>(last_point_a.<span class="built_in">x</span>()), <span class="built_in">T</span>(last_point_a.<span class="built_in">y</span>()), <span class="built_in">T</span>(last_point_a.<span class="built_in">z</span>())&#125;;</span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; lpb&#123;<span class="built_in">T</span>(last_point_b.<span class="built_in">x</span>()), <span class="built_in">T</span>(last_point_b.<span class="built_in">y</span>()), <span class="built_in">T</span>(last_point_b.<span class="built_in">z</span>())&#125;;</span><br><span class="line"></span><br><span class="line">            Eigen::Quaternion&lt;T&gt; q_last_curr&#123;q[<span class="number">3</span>], q[<span class="number">0</span>], q[<span class="number">1</span>], q[<span class="number">2</span>]&#125;;		</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//q_last_curr.normalize();</span></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; t_last_curr&#123;t[<span class="number">0</span>],t[<span class="number">1</span>],t[<span class="number">2</span>]&#125;;</span><br><span class="line">            Eigen::Matrix&lt;T, <span class="number">3</span>, <span class="number">1</span>&gt; lp;</span><br><span class="line">            lp = q_last_curr *cp + t_last_curr;</span><br><span class="line"></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; AB = lpb  - lpa;</span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; AC = lp -lpa ;</span><br><span class="line"></span><br><span class="line">            Eigen::Matrix&lt;T,<span class="number">3</span>,<span class="number">1</span>&gt; abCrossac = AB.<span class="built_in">cross</span>(AC);</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            residual[<span class="number">0</span>] = (abCrossac.<span class="built_in">norm</span>())/ (AB.<span class="built_in">norm</span>());</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">static</span> ceres::CostFunction *<span class="title">Create</span><span class="params">(<span class="type">const</span> Eigen::Vector3d curr_point, <span class="type">const</span> Eigen::Vector3d last_point_a_,</span></span></span><br><span class="line"><span class="params"><span class="function">                                                                                <span class="type">const</span> Eigen::Vector3d last_point_b_)</span></span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (<span class="keyword">new</span> ceres::<span class="built_in">AutoDiffCostFunction</span>&lt;Pl_ICP,<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>&gt;(<span class="keyword">new</span> <span class="built_in">Pl_ICP</span>(curr_point, last_point_a_, last_point_b_)));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Eigen::Vector3d curr_point, last_point_a, last_point_b;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p>将local_map的点云数据输入到kdtree当中，方便后续查找</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; map_frame_.<span class="built_in">size</span>(); ++i)&#123;</span><br><span class="line">    pcl::<span class="built_in">transformPointCloud</span>(</span><br><span class="line">        map_frame_.<span class="built_in">at</span>(i).frame_, </span><br><span class="line">        *transformed_cloud_ptr, </span><br><span class="line">        map_frame_.<span class="built_in">at</span>(i).pose</span><br><span class="line">     );</span><br><span class="line">    *map_ptr_ += *transformed_cloud_ptr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pcl_kdtree_ptr_-&gt;<span class="built_in">setInputCloud</span>(map_ptr_);</span><br></pre></td></tr></table></figure>
+
+<p>将当前帧得到的二维激光点云每个点查找之前输入kdtree中的local_map最近的两个点云进行残差块的输入</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> point_num = current_cloud-&gt;points.<span class="built_in">size</span>();</span><br><span class="line">        ceres::Problem problem_;</span><br><span class="line">           <span class="comment">//后续判断加入的优化变量纬度是否准确</span></span><br><span class="line">        config_.q_parameterization_ptr = <span class="keyword">new</span> ceres::<span class="built_in">EigenQuaternionParameterization</span>();</span><br><span class="line">        <span class="comment">//损失函数</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="comment">//验证是否优化变量的纬度是否正确</span></span><br><span class="line">        problem_.<span class="built_in">AddParameterBlock</span>(param_.q, <span class="number">4</span>, config_.q_parameterization_ptr);</span><br><span class="line">        problem_.<span class="built_in">AddParameterBlock</span>(param_.t, <span class="number">3</span>);</span><br><span class="line">        config_.loss_function_ptr =  <span class="keyword">new</span> ceres::<span class="built_in">CauchyLoss</span>(<span class="number">0.1</span>);</span><br><span class="line">        <span class="comment">//据帧求解方法</span></span><br><span class="line">        config_.options.linear_solver_type = ceres::DENSE_QR;</span><br><span class="line">        <span class="comment">// </span></span><br><span class="line">        </span><br><span class="line">        config_.options.minimizer_type = ceres::TRUST_REGION;</span><br><span class="line">        config_.options.trust_region_strategy_type = ceres::DOGLEG;</span><br><span class="line">        config_.options.dogleg_type = ceres::SUBSPACE_DOGLEG;</span><br><span class="line">        config_.options.num_threads = <span class="number">8</span>;</span><br><span class="line">        config_.options.max_num_iterations = <span class="number">100</span>;</span><br><span class="line">        config_.options.minimizer_progress_to_stdout = <span class="literal">false</span>;</span><br><span class="line">        config_.options.max_solver_time_in_seconds = <span class="number">0.10</span>;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        ros::Time start_time = ros::Time::<span class="built_in">now</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;  i &lt; point_num; ++i)&#123;</span><br><span class="line">            std::vector&lt;<span class="type">int</span>&gt; corr_ind; <span class="comment">//index</span></span><br><span class="line">            std::vector&lt;<span class="type">float</span>&gt; corr_sq_dis; <span class="comment">//</span></span><br><span class="line">            pcl_kdtree_ptr_-&gt;<span class="built_in">nearestKSearch</span>(</span><br><span class="line">                current_cloud-&gt;points[i],</span><br><span class="line">                <span class="number">2</span>,</span><br><span class="line">                corr_ind, corr_sq_dis</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span>(corr_sq_dis[<span class="number">0</span>] &gt; MAX_DIS)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//TODO cerese PL-ICP</span></span><br><span class="line"></span><br><span class="line">            Eigen::Vector3d cp&#123;current_cloud-&gt;points[i].x,current_cloud-&gt;points[i].y,current_cloud-&gt;points[i].z&#125;;</span><br><span class="line">            Eigen::Vector3d lpa&#123;map_ptr_-&gt;points[corr_ind[<span class="number">0</span>]].x,map_ptr_-&gt;points[corr_ind[<span class="number">0</span>]].y,map_ptr_-&gt;points[corr_ind[<span class="number">0</span>]].z&#125;;</span><br><span class="line">            Eigen::Vector3d lpb&#123;map_ptr_-&gt;points[corr_ind[<span class="number">1</span>]].x,map_ptr_-&gt;points[corr_ind[<span class="number">1</span>]].y,map_ptr_-&gt;points[corr_ind[<span class="number">1</span>]].z&#125;;</span><br><span class="line">            ceres::CostFunction *factor_plicp = Pl_ICP::<span class="built_in">Create</span>(</span><br><span class="line">                cp,</span><br><span class="line">                lpa,</span><br><span class="line">                lpb</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">            problem_.<span class="built_in">AddResidualBlock</span>(</span><br><span class="line">                factor_plicp,</span><br><span class="line">                config_.loss_function_ptr,</span><br><span class="line">                param_.q, param_.t</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// solve:</span></span><br><span class="line">        ceres::Solver::Summary summary;</span><br><span class="line"></span><br><span class="line">        ceres::<span class="built_in">Solve</span>(config_.options, &amp;problem_, &amp;summary);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; solve q , t completed &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        </span><br><span class="line">        Eigen::Quaternionf q&#123;param_.q[<span class="number">3</span>],param_.q[<span class="number">0</span>],param_.q[<span class="number">1</span>],param_.q[<span class="number">2</span>]&#125;;</span><br><span class="line">        Eigen::Vector3f t&#123;param_.t[<span class="number">0</span>],param_.t[<span class="number">1</span>],param_.t[<span class="number">2</span>]&#125;;</span><br><span class="line">        q.<span class="built_in">normalize</span>();</span><br><span class="line">        std::cout  &lt;&lt; <span class="string">&quot; q.w() : &quot;</span> &lt;&lt; q.<span class="built_in">w</span>()&lt;&lt; <span class="string">&quot; q.x() : &quot;</span> &lt;&lt; q.<span class="built_in">x</span>()&lt;&lt; <span class="string">&quot; q.y() : &quot;</span> &lt;&lt; q.<span class="built_in">y</span>()&lt;&lt; <span class="string">&quot; q.z() : &quot;</span> &lt;&lt; q.<span class="built_in">z</span>()&lt;&lt; std::endl;</span><br><span class="line">        dq = q;</span><br><span class="line">        dt = t;</span><br><span class="line"></span><br><span class="line">        ros::Time end_time = ros::Time::<span class="built_in">now</span>();</span><br><span class="line">        ros::Duration use_time = end_time - start_time;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; use time : &quot;</span> &lt;&lt; use_time.<span class="built_in">toSec</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里采取的是自动求导，解析求导本人数学不太好，就不推了，希望可以有人一起交流～～～</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -533,771 +1228,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/SLAM/Vinsmono-2/Vinsmono2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="maotian">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maotian">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/31/SLAM/Vinsmono-2/Vinsmono2/" class="post-title-link" itemprop="url">VinsMono-2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-03-31 19:16:24" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-03 11:50:48" itemprop="dateModified" datetime="2022-04-03T11:50:48+08:00">2022-04-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/VinsMono/" itemprop="url" rel="index"><span itemprop="name">VinsMono</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/v21-1.png" alt="v21-1"></p>
-<h3 id="1-下载imu-utils与code-utils以及老师的imu数据生成的仿真数据"><a href="#1-下载imu-utils与code-utils以及老师的imu数据生成的仿真数据" class="headerlink" title="1.下载imu_utils与code_utils以及老师的imu数据生成的仿真数据"></a><strong>1.下载imu_utils与code_utils以及老师的imu数据生成的仿真数据</strong></h3><p><a target="_blank" rel="noopener" href="https://github.com/gaowenliang/imu_utils">https://github.com/gaowenliang/imu_utils</a></p>
-<p><a target="_blank" rel="noopener" href="https://gitcode.net/mirrors/gaowenliang/code_utils?utm_source=csdn_github_accelerator">https://gitcode.net/mirrors/gaowenliang/code_utils?utm_source=csdn_github_accelerator</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/HeYijia/vio_data_simulation">https://github.com/HeYijia/vio_data_simulation</a></p>
-<p>将sumpixel_test.cpp中的 </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;backward.hpp&quot;</span> 改为#<span class="keyword">include</span> <span class="string">&quot;code_utils/backward.hpp&quot;</span> </span></span><br></pre></td></tr></table></figure>
-
-<p>三个功能包如下图所示</p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/vins21-1.png" alt="vins21-1"></p>
-<h4 id="1-1生成仿真数据集，标定Allan方差"><a href="#1-1生成仿真数据集，标定Allan方差" class="headerlink" title="1.1生成仿真数据集，标定Allan方差"></a><strong>1.1生成仿真数据集，标定Allan方差</strong></h4><p>信号噪声的组成；</p>
-<p>1)<strong>量化噪声</strong></p>
-<p> 一切量化操作所固有的噪声,是数字传感器必然出现的噪声;<br>​ 产生原因:通过AD采集把连续时间信号采集成离散信号的过程中,精度会损失,精度损失的大小和AD转换的步长有关,步长越小,量化噪声越小。</p>
-<p><strong>2)角度随机游走</strong></p>
-<p> 宽带角速率白噪声:陀螺输出角速率是含噪声的,该噪声中的白噪声成分;<br> 产生原因:计算姿态的本质是对角速率做积分,这必然会对噪声也做了积分。白噪声的积分并不是白噪声,而是一个马尔可夫过程,即当前时刻的误差是在上一时刻误差的基础上累加一个随机白噪声得到的。<br>角度误差中所含的马尔可夫性质的误差,称为角度随机游走。</p>
-<p>3)<strong>角速率随机游走</strong></p>
-<p> 与角度随机游走类似,角速率误差中所含的马尔可夫性质的误差,称为角速率随机游走。而这个马尔可夫性质的误差是由宽带角加速率白噪声累积的结果。</p>
-<p>4)<strong>零偏不稳定性噪声</strong></p>
-<p> 零偏:即常说的bias,一般不是一个固定参数,而是在一定范围内缓慢随机飘移。<br>​ 零偏不稳定性:零偏随时间缓慢变化,其变化值无法预估,需要假定一个概率区间描述它有多大的可能性落在这个区间内。时间越长,区间越大。</p>
-<p><strong>5)速率斜坡</strong></p>
-<p> 该误差是趋势性误差,而不是随机误差。<br> 随机误差,是指你无法用确定性模型去拟合并消除它,最多只能用概率模型去描述它,这样得到的预测结果也是概<br>率性质的。<br> 趋势性误差,是可以直接拟合消除的,在陀螺里产生这种误差最常见的原因是温度引起零位变化,可以通过温补来<br>消除。</p>
-<p>6)<strong>零偏重复性</strong></p>
-<p> 多次启动时,零偏不相等,因此会有一个重复性误差。在实际使用中,需要每次上电都重新估计一次。<br>​ Allan方差分析时,不包含对零偏重复性的分析。</p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/vins1-23.png" alt="vins1-23"></p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/vins1-24.png" alt="vins1-24"></p>
-<h4 id="VIO-笔记-贺一家"><a href="#VIO-笔记-贺一家" class="headerlink" title="VIO 笔记(贺一家)"></a>VIO 笔记(贺一家)</h4><p>误差分类：</p>
-<p> 加速度计和陀螺仪的误差可分为：确定性误差，随机误差。</p>
-<p> 确定性误差可以事先标定确认，包括：bias，scale …</p>
-<p> 随机误差通常假设噪声服从高斯分布，包括：高斯白噪声，bias随机游走<img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/vins1-25.png" alt="vins1-25"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">IMU::addIMUnoise</span><span class="params">(MotionData&amp; data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::random_device rd;</span><br><span class="line">    <span class="function">std::default_random_engine <span class="title">generator_</span><span class="params">(rd())</span></span>;</span><br><span class="line">    <span class="function">std::normal_distribution&lt;<span class="type">double</span>&gt; <span class="title">noise</span><span class="params">(<span class="number">0.0</span>, <span class="number">1.0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Eigen::Vector3d <span class="title">noise_gyro</span><span class="params">(noise(generator_),noise(generator_),noise(generator_))</span></span>;</span><br><span class="line">    Eigen::Matrix3d gyro_sqrt_cov = param_.gyro_noise_sigma * Eigen::Matrix3d::<span class="built_in">Identity</span>();</span><br><span class="line">    data.imu_gyro = data.imu_gyro + gyro_sqrt_cov * noise_gyro / <span class="built_in">sqrt</span>( param_.imu_timestep ) + gyro_bias_;</span><br><span class="line"></span><br><span class="line">    <span class="function">Eigen::Vector3d <span class="title">noise_acc</span><span class="params">(noise(generator_),noise(generator_),noise(generator_))</span></span>;</span><br><span class="line">    Eigen::Matrix3d acc_sqrt_cov = param_.acc_noise_sigma * Eigen::Matrix3d::<span class="built_in">Identity</span>();</span><br><span class="line">    data.imu_acc = data.imu_acc + acc_sqrt_cov * noise_acc / <span class="built_in">sqrt</span>( param_.imu_timestep ) + acc_bias_;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// gyro_bias update</span></span><br><span class="line">    <span class="function">Eigen::Vector3d <span class="title">noise_gyro_bias</span><span class="params">(noise(generator_),noise(generator_),noise(generator_))</span></span>;</span><br><span class="line">    gyro_bias_ += param_.gyro_bias_sigma * <span class="built_in">sqrt</span>(param_.imu_timestep ) * noise_gyro_bias;</span><br><span class="line">    data.imu_gyro_bias = gyro_bias_;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// acc_bias update</span></span><br><span class="line">    <span class="function">Eigen::Vector3d <span class="title">noise_acc_bias</span><span class="params">(noise(generator_),noise(generator_),noise(generator_))</span></span>;</span><br><span class="line">    acc_bias_ += param_.acc_bias_sigma * <span class="built_in">sqrt</span>(param_.imu_timestep ) * noise_acc_bias;</span><br><span class="line">    data.imu_acc_bias = acc_bias_;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上述代码为添加IMU误差，算法步骤如下，可以看到该加噪声函数中对噪声进行了离散化处理:</p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/vins1-26.png" alt="vins1-26"></p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/vins1-27.png" alt="vins1-27"></p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/vins1-28.png" alt="vins1-28"></p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/vins1-29.png" alt="vins1-29"></p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-2/vins1-210.png" alt="vins1-210"></p>
-<h4 id="1-2-生成ROS的imu数据"><a href="#1-2-生成ROS的imu数据" class="headerlink" title="1.2 生成ROS的imu数据"></a>1.2 生成ROS的imu数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosrun vio_data_simulation vio_data_simulation_node    <span class="comment"># 生成 imu.bag 数据集</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;launch&gt;</span><br><span class="line">    &lt;node pkg=<span class="string">&quot;imu_utils&quot;</span> <span class="built_in">type</span>=<span class="string">&quot;imu_an&quot;</span> name=<span class="string">&quot;imu_an&quot;</span> output=<span class="string">&quot;screen&quot;</span>&gt;</span><br><span class="line">        &lt;param name=<span class="string">&quot;imu_topic&quot;</span> <span class="built_in">type</span>=<span class="string">&quot;string&quot;</span> value= <span class="string">&quot;/imu&quot;</span>/&gt;				&lt;!--imu ROS话题  /imu --&gt;</span><br><span class="line">        &lt;param name=<span class="string">&quot;imu_name&quot;</span> <span class="built_in">type</span>=<span class="string">&quot;string&quot;</span> value= <span class="string">&quot;sim_imu&quot;</span>/&gt;</span><br><span class="line">        &lt;param name=<span class="string">&quot;data_save_path&quot;</span> <span class="built_in">type</span>=<span class="string">&quot;string&quot;</span> value= <span class="string">&quot;$(find imu_utils)/data/&quot;</span>/&gt;	&lt;!--保存表标定完毕后数据路径--&gt;</span><br><span class="line">        &lt;param name=<span class="string">&quot;max_time_min&quot;</span> <span class="built_in">type</span>=<span class="string">&quot;int&quot;</span> value= <span class="string">&quot;230&quot;</span>/&gt;		&lt;!--读取数据的最大时间--&gt;</span><br><span class="line">        &lt;param name=<span class="string">&quot;max_cluster&quot;</span> <span class="built_in">type</span>=<span class="string">&quot;int&quot;</span> value= <span class="string">&quot;100&quot;</span>/&gt;</span><br><span class="line">    &lt;/node&gt;</span><br><span class="line">&lt;/launch&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">roslaunch imu_utils A3.launch</span><br><span class="line">rosbag  play  imu.bag  -r  <span class="number">500</span>    <span class="comment"># 以500倍速播放</span></span><br></pre></td></tr></table></figure>
-
-<p>标定结果： FILE : imu_utils_ws&#x2F;src&#x2F;imu_utils&#x2F;data</p>
-<p>注意： sim_imu 预设置的噪声 单位为 gyro : rad&#x2F;(s * sqrt(hz)) acc : m&#x2F;(s^2*sqrt(hz)) ， 而imu_utils 预设的的噪声单位为 gyro: rad&#x2F;s acc: m&#x2F;s^2。统一单位时，需要将imu_utils 的结果都除以 sqrt(hz) , sim_imu 的 采样频率为200hz , 所以 imu_utils 的结果都需要除以 sqrt(200) &#x3D; 14.14</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/SLAM/Vinsmono-4/vins4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="maotian">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maotian">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/31/SLAM/Vinsmono-4/vins4/" class="post-title-link" itemprop="url">VinsMono-4</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-03-31 19:16:24" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-03 11:51:16" itemprop="dateModified" datetime="2022-04-03T11:51:16+08:00">2022-04-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/VinsMono/" itemprop="url" rel="index"><span itemprop="name">VinsMono</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3que.png" alt="vin3que"> </p>
-<p><strong>1.2 第二问更改(看错题目了，其实都是很简单的雅可比求导)</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">31</span>行 <span class="built_in">residual_</span>(<span class="number">0</span>) = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) ) - y_;  <span class="comment">// 构建残差</span></span><br><span class="line"></span><br><span class="line"><span class="number">39</span>行 <span class="type">double</span> exp_y = std::<span class="built_in">exp</span>( <span class="built_in">abc</span>(<span class="number">0</span>)*x_*x_ + <span class="built_in">abc</span>(<span class="number">1</span>)*x_ + <span class="built_in">abc</span>(<span class="number">2</span>) );</span><br><span class="line"></span><br><span class="line"><span class="number">44</span>行 jaco_abc &lt;&lt; x_ * x_ * exp_y, x_ * exp_y , <span class="number">1</span> * exp_y;</span><br><span class="line"></span><br><span class="line"><span class="number">76</span>行 <span class="type">double</span> x = i/<span class="number">1000.</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">80</span>行 <span class="type">double</span> y = std::<span class="built_in">exp</span>( a*x*x + b*x + c ) + n;</span><br></pre></td></tr></table></figure>
-
-<p><strong>1.1 第一问 存储lambda的数值</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Problem::SaveLamda</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    outfile.<span class="built_in">open</span>(<span class="string">&quot;/home/maotian/vio/3/ans/CurveFitting_LM/build/app/data.txt&quot;</span>, ios::binary | ios::app | ios::in | ios::out);</span><br><span class="line">    outfile &lt;&lt; currentLambda_ &lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;i++&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    outfile.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (rho &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">isfinite</span>(tempChi))   <span class="comment">// last step was good, 误差在下降</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">double</span> alpha = <span class="number">1.</span> - <span class="built_in">pow</span>((<span class="number">2</span> * rho - <span class="number">1</span>), <span class="number">3</span>);</span><br><span class="line">        alpha = std::<span class="built_in">min</span>(alpha, <span class="number">2.</span> / <span class="number">3.</span>);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; alpha &quot;</span> &lt;&lt; alpha &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">double</span> scaleFactor = (std::max)(<span class="number">1.</span> / <span class="number">3.</span>, alpha);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; scaleFactor &quot;</span> &lt;&lt; scaleFactor &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; currentLambda_ &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        currentLambda_ *= scaleFactor;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;currentLambda_ :  &quot;</span> &lt;&lt; currentLambda_ &lt;&lt; std::endl;</span><br><span class="line">        ni_ = <span class="number">2</span>;</span><br><span class="line">        currentChi_ = tempChi;</span><br><span class="line">        <span class="comment">//存储lambda值</span></span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        currentLambda_ *= ni_;</span><br><span class="line">        ni_ *= <span class="number">2</span>;</span><br><span class="line">        <span class="built_in">SaveLamda</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vin3ans1-2.png" alt="vin3ans1-2"></p>
-<p>上图为lambda所有值</p>
-<p><strong>1.3 <a target="_blank" rel="noopener" href="https://blog.csdn.net/hitljy/article/details/107694047?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164830367716780271564345%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=164830367716780271564345&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-5-107694047.nonecase&utm_term=vio&spm=1018.2226.3001.4450">大佬的多个策略</a></strong></p>
-<p><img src="/home/maotian/%E7%AC%94%E8%AE%B0/Vinsmono-3/vinsans2.png" alt="vinsans2"></p>
-<p>参考 pdf 的 f35 很容易能够得到结论</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/SLAM/Vinsmono-5/Vinsmono-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="maotian">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maotian">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/31/SLAM/Vinsmono-5/Vinsmono-5/" class="post-title-link" itemprop="url">VinsMono-5</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-03-31 19:16:24" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-03 11:51:37" itemprop="dateModified" datetime="2022-04-03T11:51:37+08:00">2022-04-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/VinsMono/" itemprop="url" rel="index"><span itemprop="name">VinsMono</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.2k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="/../../source/images/Vinsmono-5/2022-04-01%2020-52-00%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-01 20-52-00 的屏幕截图"></p>
-<h3 id="1-1-计算H矩阵"><a href="#1-1-计算H矩阵" class="headerlink" title="1-1 计算H矩阵"></a>1-1 计算H矩阵</h3><p>代码中设置相机pose和landmark逆深度两种节点，设置三元边（路标点的逆深度InveseDepth、第一次观测到该路标点的source Camera的位姿T_World_From_Body1，和观测到该路标点的mearsurement Camera位姿T_World_From_Body2）。该三元边残差和对应雅克比的计算参考第3讲视觉重投影误差Jacobian推导部分。</p>
-<p>逆深度的雅可比求导数如下</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/CSDN_XCS/article/details/96288327">CSDN逆深度</a> </p>
-<p><img src="/../../source/images/Vinsmono-5/2022-04-01%2020-57-49%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="2022-04-01 20-57-49 的屏幕截图"></p>
-<p>参照ppt中公式，代码中b计算时自身为负数所以代码中b与公式相反</p>
-<p><code>void Problem::MakeHessian()</code>中：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 所有的信息矩阵叠加起来</span></span><br><span class="line"> <span class="comment">// <span class="doctag">TODO:</span>: home work. 完成 H index 的填写.</span></span><br><span class="line"> <span class="comment">// 确定不会有错误的产生，那么可以使用noaliasd()函数来避免产生临时变量,使用noalias()函数来声明这里没有混淆直接赋值</span></span><br><span class="line"> H.<span class="built_in">block</span>(index_i, index_j, dim_i, dim_j).<span class="built_in">noalias</span>() += hessian;</span><br><span class="line"> <span class="keyword">if</span> (j != i) &#123;</span><br><span class="line">     <span class="comment">// 对称的下三角</span></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span>: home work. 完成 H index 的填写.</span></span><br><span class="line">     H.<span class="built_in">block</span>(index_j, index_i, dim_j, dim_i).<span class="built_in">noalias</span>() += hessian.<span class="built_in">transpose</span>();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>void Problem::SolveLinearSystem()</code>中：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SLAM 问题采用舒尔补的计算方式</span></span><br><span class="line"><span class="comment">// step1: schur marginalization --&gt; Hpp, bpp</span></span><br><span class="line"><span class="type">int</span> reserve_size = ordering_poses_;</span><br><span class="line"><span class="type">int</span> marg_size = ordering_landmarks_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span>: home work. 完成矩阵块取值，Hmm，Hpm，Hmp，bpp，bmm</span></span><br><span class="line"> MatXX Hmm = Hessian_.<span class="built_in">block</span>(reserve_size,reserve_size, marg_size, marg_size);</span><br><span class="line"> MatXX Hpm = Hessian_.<span class="built_in">block</span>(<span class="number">0</span>,reserve_size, reserve_size, marg_size);</span><br><span class="line"> MatXX Hmp = Hessian_.<span class="built_in">block</span>(reserve_size,<span class="number">0</span>, marg_size, reserve_size);</span><br><span class="line"> VecX bpp = b_.<span class="built_in">segment</span>(<span class="number">0</span>,reserve_size);</span><br><span class="line"> VecX bmm = b_.<span class="built_in">segment</span>(reserve_size,marg_size);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Hmm 是对角线矩阵，它的求逆可以直接为对角线块分别求逆，如果是逆深度，对角线块为1维的，则直接为对角线的倒数，这里可以加速</span></span><br><span class="line"><span class="function">MatXX <span class="title">Hmm_inv</span><span class="params">(MatXX::Zero(marg_size, marg_size))</span></span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> landmarkVertex : idx_landmark_vertices_) &#123;</span><br><span class="line">    <span class="type">int</span> idx = landmarkVertex.second-&gt;<span class="built_in">OrderingId</span>() - reserve_size;</span><br><span class="line">    <span class="type">int</span> size = landmarkVertex.second-&gt;<span class="built_in">LocalDimension</span>();</span><br><span class="line">    Hmm_inv.<span class="built_in">block</span>(idx, idx, size, size) = Hmm.<span class="built_in">block</span>(idx, idx, size, size).<span class="built_in">inverse</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span>: home work. 完成舒尔补 Hpp, bpp 代码</span></span><br><span class="line">MatXX tempH = Hpm * Hmm_inv;</span><br><span class="line"> H_pp_schur_ = Hessian_.<span class="built_in">block</span>(<span class="number">0</span>,<span class="number">0</span>,reserve_size,reserve_size) - tempH * Hmp;</span><br><span class="line"> b_pp_schur_ = bpp - tempH * bpp;</span><br><span class="line"></span><br><span class="line"><span class="comment">// step2: solve Hpp * delta_x = bpp</span></span><br><span class="line"><span class="function">VecX <span class="title">delta_x_pp</span><span class="params">(VecX::Zero(reserve_size))</span></span>;</span><br><span class="line"><span class="comment">// PCG Solver</span></span><br><span class="line"><span class="keyword">for</span> (ulong i = <span class="number">0</span>; i &lt; ordering_poses_; ++i) &#123;</span><br><span class="line">    <span class="built_in">H_pp_schur_</span>(i, i) += currentLambda_;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n = H_pp_schur_.<span class="built_in">rows</span>() * <span class="number">2</span>;                       <span class="comment">// 迭代次数</span></span><br><span class="line">delta_x_pp = <span class="built_in">PCGSolver</span>(H_pp_schur_, b_pp_schur_, n);  <span class="comment">// 哈哈，小规模问题，搞 pcg 花里胡哨</span></span><br><span class="line">delta_x_.<span class="built_in">head</span>(reserve_size) = delta_x_pp;</span><br><span class="line"><span class="comment">//        std::cout &lt;&lt; delta_x_pp.transpose() &lt;&lt; std::endl;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span>: home work. step3: solve landmark</span></span><br><span class="line"><span class="function">VecX <span class="title">delta_x_ll</span><span class="params">(marg_size)</span></span>;</span><br><span class="line">delta_x_ll = Hmm_inv * (bmm - Hmp * delta_x_pp);</span><br><span class="line">delta_x_.<span class="built_in">tail</span>(marg_size) = delta_x_ll;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>预处理共轭梯度法PCG(Preconditioned Conjugate Gradient)是一种SLAM中常用的位姿优化算法，从共轭梯度法（Conjugate Gradient）衍生而来，用于快速计算最优值。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/OORRANNGGE/article/details/82744157">PCG</a></p>
-<p>反正最后能解x，吗的具体推导过程看不懂先不管了</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/SLAM/%E5%A4%9A%E4%BC%A0%E6%84%9F%E5%99%A8%E8%9E%8D%E5%90%88/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="maotian">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maotian">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/31/SLAM/%E5%A4%9A%E4%BC%A0%E6%84%9F%E5%99%A8%E8%9E%8D%E5%90%88/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" class="post-title-link" itemprop="url">多传感器融合滑动窗口</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-03-31 19:16:24" itemprop="dateCreated datePublished" datetime="2022-03-31T19:16:24+08:00">2022-03-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-03 11:47:50" itemprop="dateModified" datetime="2022-04-03T11:47:50+08:00">2022-04-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM/%E5%A4%9A%E4%BC%A0%E6%84%9F%E5%99%A8%E8%9E%8D%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">多传感器融合</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>61</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53972892">因子图优化 SLAM 研究方向归纳</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41281151/article/details/123406337">多传感器融合定位 第九章 基于优化的建图方法</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/150367249">多传感器融合定位理论基础（十二）：滑动窗口原理及应用</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%BA%BF%E6%80%A7%E5%8F%98%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="maotian">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maotian">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/31/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%BA%BF%E6%80%A7%E5%8F%98%E5%8C%96/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-31 19:10:42 / Modified: 19:29:57" itemprop="dateCreated datePublished" datetime="2022-03-31T19:10:42+08:00">2022-03-31</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>21</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>1.两个相互独立的高斯分布相加也是高斯分布</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="maotian">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maotian">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/31/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-03-31 16:18:09" itemprop="dateCreated datePublished" datetime="2022-03-31T16:18:09+08:00">2022-03-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-03 12:55:54" itemprop="dateModified" datetime="2022-04-03T12:55:54+08:00">2022-04-03</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>408</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br><span class="line">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</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/01/SLAM/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="maotian">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maotian">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/01/SLAM/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-01 13:58:43" itemprop="dateCreated datePublished" datetime="2021-11-01T13:58:43+08:00">2021-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-03 12:55:49" itemprop="dateModified" datetime="2022-04-03T12:55:49+08:00">2022-04-03</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3.6k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p> 摄像机标定(Camera calibration)简单来说是从<strong>世界坐标系</strong>换到<strong>图像坐标系</strong>的过程,即在图片上哪个像素点</p>
-<h2 id="标定分为两个部分"><a href="#标定分为两个部分" class="headerlink" title="标定分为两个部分"></a>标定分为两个部分</h2><p>​    1.第一步是从世界坐标系转换为相机坐标系，这一步是三维点到三维点的转换，主要包括旋转矩阵 R ，t等参数，称为<strong>相机外参</strong>标定</p>
-<ol start="2">
-<li>第二步是相机坐标系到图像坐标系，这一部是三维到二维点的转换，主要包括 K(相机内参)参数，称为<strong>相机内参</strong>的标定</li>
-</ol>
-<h2 id="举列"><a href="#举列" class="headerlink" title="举列:"></a>举列:</h2><p>相机与激光雷达的标定：</p>
-<h3 id="传统标定方法"><a href="#传统标定方法" class="headerlink" title="传统标定方法"></a>传统标定方法</h3><p>一、外参的标定方法</p>
-<p>​    以相机为中心，根据人为测量激光雷达与相机关于右手坐标系的相对位姿。后续在通过结果细微的调节.</p>
-<p>一、内参的标定方法</p>
-<p>​    (1) 首先打印出标定版，如下图</p>
-<img src="/home/maotian/标定版.webp" style="zoom:50%;" />
-
-
-
-<p>​    (2) 如果是普通相机或者鱼眼相机，有两个使用工具，第一个是<strong>ROS的相机标定工具</strong></p>
-<p>​    在终端输入以下指令</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosrun camera_calibration cameracalibrator.py --size <span class="number">8</span>x6 --square <span class="number">0.108</span> image:=/camera/right/image_raw</span><br></pre></td></tr></table></figure>
-
-<p>​        其中 -<strong>-size</strong> 表示为标定板长宽的黑白格子的数量</p>
-<p>​                <strong>–square</strong> 为每个黑白格的长度，单位为(m)</p>
-<p>​                <strong>–image</strong>    为图像的话题</p>
-<p>​    </p>
-<p>演示效果如下：</p>
-<img src="/home/maotian/图片/2021-11-01 14-37-07 的屏幕截图.png" style="zoom:50%;" />
-
-
-
-<p>右边有四个参数 </p>
-<p>X 为标定板在图像中的<strong>横向照片</strong>提取数量是否满足要求。</p>
-<p>Y 为标定版在图像中的<strong>纵向照片</strong>提取数量是否满足要求。</p>
-<p>Size 为标定版在图像中的<strong>远近照片</strong>提取数量是否满足要求。</p>
-<p>Skew 为标定版在图像中的<strong>倾斜照片</strong>提取数量是否满足要求。</p>
-<p>当所有角度需求满足要求时，即四个参数下方都为绿色时，CALIBRATE按钮显示黄色，点击即可开始标定相机内参。</p>
-<p>第一个滑动条可根据是否为普通相机或者鱼眼相机来选择。    最终得到相机内参参数如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">(<span class="string">&#x27;D = &#x27;</span>, [<span class="number">-0.04483935850269598</span>, <span class="number">0.21668635011274098</span>, <span class="number">-7.511409441343408e-06</span>, <span class="number">-0.014566337456272171</span>, <span class="number">0.0</span>])</span><br><span class="line">(<span class="string">&#x27;K = &#x27;</span>, [<span class="number">657.954311720957</span>, <span class="number">0.0</span>, <span class="number">297.0047475623269</span>, <span class="number">0.0</span>, <span class="number">653.7091694249858</span>, <span class="number">236.35301154477284</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">(<span class="string">&#x27;R = &#x27;</span>, [<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">(<span class="string">&#x27;P = &#x27;</span>, [<span class="number">664.5278930664062</span>, <span class="number">0.0</span>, <span class="number">290.7184962020892</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">667.2344970703125</span>, <span class="number">236.43032880130704</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>])</span><br><span class="line">None</span><br><span class="line"># oST version <span class="number">5.0</span> parameters</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">[image]</span><br><span class="line"> </span><br><span class="line">width</span><br><span class="line"><span class="number">640</span></span><br><span class="line"> </span><br><span class="line">height</span><br><span class="line"><span class="number">480</span></span><br><span class="line"> </span><br><span class="line">[narrow_stereo]</span><br><span class="line"> </span><br><span class="line">camera matrix</span><br><span class="line"><span class="number">657.954312</span> <span class="number">0.000000</span> <span class="number">297.004748</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">653.709169</span> <span class="number">236.353012</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">0.000000</span> <span class="number">1.000000</span></span><br><span class="line"> </span><br><span class="line">distortion</span><br><span class="line"><span class="number">-0.044839</span> <span class="number">0.216686</span> <span class="number">-0.000008</span> <span class="number">-0.014566</span> <span class="number">0.000000</span></span><br><span class="line"> </span><br><span class="line">rectification</span><br><span class="line"><span class="number">1.000000</span> <span class="number">0.000000</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">1.000000</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">0.000000</span> <span class="number">1.000000</span></span><br><span class="line"> </span><br><span class="line">projection</span><br><span class="line"><span class="number">664.527893</span> <span class="number">0.000000</span> <span class="number">290.718496</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">667.234497</span> <span class="number">236.430329</span> <span class="number">0.000000</span></span><br><span class="line"><span class="number">0.000000</span> <span class="number">0.000000</span> <span class="number">1.000000</span> <span class="number">0.000000</span></span><br></pre></td></tr></table></figure>
-
-<p>主要关注以下参数:</p>
-<p>camera matrix<br>657.954312 0.000000 297.004748       fx , 0, cx<br>0.000000 653.709169 236.353012   &#x3D;  0  , fy ,cy,</p>
-<p>0.000000 0.000000 1.00000<strong>角度映射</strong></p>
-<pre><code>全景相机包含了相机左右360度 上下180度所有的方位
-
-首先通过上述所的激光点到相机坐标转换
-
-得到的相机坐标下的每个激光点的 x y z 
-
-通过 **arctan(y/x)** 得到偏航角度 , 得到在像素坐标横坐标 为  照片长度/360 * 偏航角度
-
-通过 **arctan(z/(x^2 + y^2))** 得到俯仰角度    得到在像素坐标下纵坐标为 照片宽度/180 * 俯仰角度0               0 ,  0 ,  1
-</code></pre>
-<p>当已知外参.激光雷达得到的每个激光点位置转换到相机坐标的转换公式如下 </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> point_in_cam_x = output_cloud-&gt;points[i].x * <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">0</span>) + output_cloud-&gt;points[i].y * <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">1</span>) + output_cloud-&gt;points[i].z * <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">2</span>) + <span class="built_in">laser_to_cam_</span>(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line"><span class="type">float</span> point_in_cam_y = output_cloud-&gt;points[i].x * <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">0</span>) + output_cloud-&gt;points[i].y * <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">1</span>) + output_cloud-&gt;points[i].z * <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">2</span>) + <span class="built_in">laser_to_cam_</span>(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="type">float</span> point_in_cam_z = output_cloud-&gt;points[i].x * <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">0</span>) + output_cloud-&gt;points[i].y * <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">1</span>) + output_cloud-&gt;points[i].z * <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">2</span>) + <span class="built_in">laser_to_cam_</span>(<span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
-
-<p>output_cloud为激光雷达每个激光点的数据</p>
-<p>laser_to_cam_&lt;&lt;0.08083690,       -0.99662126,       -0.01167763,       -0.19623674,<br>                    0.04087759,       0.01505343,       -0.99906721,       -0.26569012,                           R   t<br>                    0.99591426,      0.08030508,       0.04197840,       -0.59186737,                 &#x3D;           0  1<br>                    0.00000000,       0.00000000,       0.00000000,       1.00000000;</p>
-<p>为激光雷达到相机的人为测量的变换矩阵。</p>
-<p>当已知内参，相机坐标中的位置转换到像素位置的位置如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = (<span class="type">int</span>)((<span class="built_in">camera_intrinsics_</span>(<span class="number">0</span>, <span class="number">0</span>) * point_in_cam_x + <span class="built_in">camera_intrinsics_</span>(<span class="number">0</span>, <span class="number">1</span>) * point_in_cam_y + <span class="built_in">camera_intrinsics_</span>(<span class="number">0</span>, <span class="number">2</span>) * point_in_cam_z) / point_in_cam_z);</span><br><span class="line"> <span class="type">int</span> y = (<span class="type">int</span>)((<span class="built_in">camera_intrinsics_</span>(<span class="number">1</span>, <span class="number">0</span>) * point_in_cam_x + <span class="built_in">camera_intrinsics_</span>(<span class="number">1</span>, <span class="number">1</span>) * point_in_cam_y + <span class="built_in">camera_intrinsics_</span>(<span class="number">1</span>, <span class="number">2</span>) * point_in_cam_z) / point_in_cam_z);</span><br></pre></td></tr></table></figure>
-
-<p> camera_intrinsics_ &lt;&lt; fx, 0, cx,0, 0,fy, cy,0,0, 0, 0, 0, 0.0, 0.0, 0.0, 1.0;为相机内参参数</p>
-<p><strong>最终可以实现激光雷达的激光点到相机的像素具体的位置的变换</strong></p>
-<h4 id="也可以使用matlab2020b进行标定"><a href="#也可以使用matlab2020b进行标定" class="headerlink" title="也可以使用matlab2020b进行标定"></a>也可以使用matlab2020b进行标定</h4><p>matlab2019之前的相机标定没有自带可标定鱼眼摄像头的工具</p>
-<p>可参考以下链接</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/heroacool/article/details/51023921">matlab标定</a></p>
-<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1gKZkawzO8HEH3BlW-d_vFwhttps://pan.baidu.com/s/1gKZkawzO8HEH3BlW-d_vFw">百度网盘链接 </a></p>
-<h3 id="全景相机的标定方法"><a href="#全景相机的标定方法" class="headerlink" title="全景相机的标定方法"></a>全景相机的标定方法</h3><p>由于全景相机通过自己进行放射变换等一些处理，所以使用传统的标定工具无法得到一个正确的相机内参参数。如下图</p>
-<img src="/home/maotian/全景相机标定结果.jpg" style="zoom: 25%;" />
-
-<p><img src="/home/maotian/RosProject/watman/backpack_equipment/src/test_Word/img1/95.jpg" style="zoom: 50%;" /> <img src="/home/maotian/RosProject/watman/backpack_equipment/src/test_Word/img2/95.jpg" style="zoom: 50%;" /></p>
-<p>传统的matlab标定得到的结果为标定板只会出现在相机坐标系前方180度的范围，而实际标定过程中是对相机360度的范围分别进行了标定。</p>
-<p>所以传统方法不太使用与全景相机的标定</p>
-<p>故采取的方法为如下</p>
-<p>(1) <strong>外参标定</strong></p>
-<p>​    实验方法如上述传统标定方法</p>
-<p>(2) <strong>角度映射</strong></p>
-<p>​    全景相机包含了相机左右360度 上下180度所有的方位</p>
-<p>​    首先通过上述所的激光点到相机坐标转换</p>
-<p>​    得到的相机坐标下的每个激光点的 x y z </p>
-<p>​    通过 <strong>arctan(y&#x2F;x)</strong> 得到偏航角度 , 得到在像素坐标横坐标 为  照片长度&#x2F;360 * 偏航角度</p>
-<p>​    通过 <strong>arctan(z&#x2F;(x^2 + y^2))</strong> 得到俯仰角度    得到在像素坐标下纵坐标为 照片宽度&#x2F;180 * 俯仰角度</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1363,14 +1297,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1413,13 +1347,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">30k</span>
+    <span title="Symbols count total">33k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">27 mins.</span>
+    <span title="Reading time total">30 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
